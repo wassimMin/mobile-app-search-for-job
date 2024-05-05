@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/home_background">
+    <item
+        android:id="@+id/action_post_job"
+        android:title="Post Jobs"/>
+    <item
+        android:id="@+id/action_consult_job"
+        android:title="Consult Posted Jobs"/>
+</menu>

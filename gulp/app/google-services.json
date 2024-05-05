@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "719169787162",
+    "project_id": "yellow-24143",
+    "storage_bucket": "yellow-24143.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:719169787162:android:9a19e50ffe32b46a7588a3",
+        "android_client_info": {
+          "package_name": "com.example.yellow"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvfghTl4XIzY2dP-XZ515J8o1IKaK-vwc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

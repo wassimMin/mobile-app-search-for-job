@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <!-- Main content layout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/home_background"
+            android:fitsSystemWindows="true">
+
+            <!-- Top Bar -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp">
+
+                <!-- Menu Icon -->
+                <ImageView
+                    android:id="@+id/menu_icon"
+                    android:layout_centerVertical="true"
+                    android:layout_height="40dp"
+                    android:layout_width="40dp"
+                    android:src="@drawable/menu_icon"
+                    android:onClick="openNavigationDrawer"/>
+
+                <!-- Add Icon -->
+                <ImageView
+                    android:id="@+id/postjobs"
+                    android:layout_width="50dp"
+                    android:layout_height="48dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:background="@color/banner_background"
+                    android:onClick="showPopupMenu"
+                    android:padding="5dp"
+                    android:src="@drawable/add_missing_place_icon" />
+            </RelativeLayout>
+
+            <!-- Search Bar -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <!-- App Name -->
+                <TextView
+                    android:id="@+id/app_name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Search Job here"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="28sp" />
+
+                <!-- Search Box -->
+                <RelativeLayout
+                    android:background="@color/white"
+                    android:elevation="8dp"
+                    android:layout_below="@id/app_name"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent">
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_width="wrap_content"
+                        android:text="Search Text" />
+
+                    <ImageView
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_width="30dp"
+                        android:src="@drawable/search_icon" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <!-- Job List -->
+            <ScrollView
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_width="match_parent">
+
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/job_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:itemCount="5"
+                            tools:listitem="@layout/job_list"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+        <!-- NavigationView -->
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:headerLayout="@layout/header"
+            app:menu="@menu/main_menu"
+            android:layout_gravity="start"/>
+    </androidx.drawerlayout.widget.DrawerLayout>

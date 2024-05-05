@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/home_background">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:title="Home"
+            android:icon="@drawable/home_icon"></item>
+        <item
+            android:id="@+id/nav_notification"
+            android:title="Notification"
+            android:icon="@drawable/notification_ic"></item>
+        <item
+            android:id="@+id/nav_application"
+            android:title="Application"
+            android:icon="@drawable/application_ic"></item>
+        <item
+            android:id="@+id/chat"
+            android:title="Chat"
+            android:icon="@drawable/baseline_lock_24"></item>
+        <item
+            android:id="@+id/nav_logout"
+            android:title="Logout"
+            android:icon="@drawable/baseline_logout_24"></item>
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:title="Profile">
+            <menu>
+                <item
+                    android:id="@+id/nav_profile"
+                    android:title="Profile"
+                    android:icon="@drawable/profile_ic"></item>
+            </menu>
+        </item>
+    </group>
+    <item
+        android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:title="Share"
+                android:icon="@drawable/share_ic"></item>
+            <item
+                android:id="@+id/nav_rate"
+                android:title="Rate us"
+                android:icon="@drawable/rate_ic"></item>
+        </menu>
+    </item>
+</menu>
