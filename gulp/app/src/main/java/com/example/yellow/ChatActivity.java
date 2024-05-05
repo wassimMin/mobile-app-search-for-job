@@ -1,6 +1,8 @@
 package com.example.yellow;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,7 +41,8 @@ public class ChatActivity extends AppCompatActivity {
     int usertype;
     MessageAdapter messageAdapter;
     List<Message> messageList;
-
+    Intent intent;
+    int idreceiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +54,8 @@ public class ChatActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("yellow", MODE_PRIVATE);
         id = sharedPreferences.getInt("userid", 0);
         usertype = sharedPreferences.getInt("usertype", 0);
-
+        intent = getIntent();
+        idreceiver = intent.getIntExtra("userid",0);
         buttonSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,10 +122,8 @@ public class ChatActivity extends AppCompatActivity {
                         try {
                             JSONArray jsonArray = new JSONArray(response);
 
-                            // Clear the existing message list
                             messageList.clear();
 
-                            // Parse each message from the JSON array
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 int messageId = jsonObject.getInt("message_id");
@@ -129,12 +131,10 @@ public class ChatActivity extends AppCompatActivity {
                                 int senderId = jsonObject.getInt("sender_id");
                                 String userType = jsonObject.getString("message_usertype");
 
-                                // Create a new Message object and add it to the list
-                                Message message = new Message(messageId, content, senderId, userType);
+                                Message message = new Message(messageId, content, senderId ,userType);
                                 messageList.add(message);
                             }
 
-                            // Notify adapter that data set has changed
                             messageAdapter.notifyDataSetChanged();
                         } catch (JSONException e) {
                             // JSON parsing error

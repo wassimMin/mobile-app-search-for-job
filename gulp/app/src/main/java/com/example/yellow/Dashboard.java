@@ -63,7 +63,7 @@ public class Dashboard extends AppCompatActivity {
         findViewById(R.id.btn_chat).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Dashboard.this, ChatActivity.class);
+                Intent intent = new Intent(Dashboard.this, UserSelection.class);
                 startActivity(intent);
                 finish();
             }

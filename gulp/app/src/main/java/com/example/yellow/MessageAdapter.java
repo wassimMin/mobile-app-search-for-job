@@ -57,7 +57,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         }
     }
 
-    // Helper method to get color from resources within the adapter
     private int getColor(int colorResId, View itemView) {
         Context context = itemView.getContext();
         return ContextCompat.getColor(context, colorResId);

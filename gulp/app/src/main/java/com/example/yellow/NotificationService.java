@@ -29,7 +29,7 @@ import java.net.URL;
 
 public class NotificationService extends Service {
 
-    private static final String SERVER_URL = "http://192.168.215.101/memoire/get_notifications.php";
+    private static final String SERVER_URL = "http://192.168.1.52/memoire/get_notifications.php";
     private static final String CHANNEL_ID = "job_notification_channel";
     private int notificationId = 1;
 
