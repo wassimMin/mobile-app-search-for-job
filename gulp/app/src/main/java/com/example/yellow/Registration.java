@@ -43,14 +43,12 @@ public class Registration extends AppCompatActivity {
         textInputEditTextpassword = findViewById(R.id.password);
         buttonSubmit = findViewById(R.id.submit);
         textviewerror = findViewById(R.id.error);
-        progressbar = findViewById(R.id.loading);
         radioGroup = findViewById(R.id.radioGroup);
 
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 textviewerror.setVisibility(View.GONE);
-                progressbar.setVisibility(View.VISIBLE);
                 name = String.valueOf(textInputEditTextname.getText());
                 email = String.valueOf(textInputEditTextemail.getText());
                 password = String.valueOf(textInputEditTextpassword.getText());
@@ -74,7 +72,6 @@ public class Registration extends AppCompatActivity {
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                progressbar.setVisibility(View.GONE);
                                 try {
                                     JSONObject jsonObject = new JSONObject(response);
                                     String status = jsonObject.getString("status");
@@ -95,7 +92,6 @@ public class Registration extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        progressbar.setVisibility(View.GONE);
                         textviewerror.setText(error.getLocalizedMessage());
                         textviewerror.setVisibility(View.VISIBLE);
                     }

@@ -39,8 +39,7 @@ public class Login extends AppCompatActivity {
         textinputedittextemail = findViewById(R.id.email);
         textinputedittextpassword = findViewById(R.id.password);
         textviewerror = findViewById(R.id.error);
-        progressbar = findViewById(R.id.loading);
-        textviewregisternow = findViewById(R.id.Registernow);
+        textviewregisternow = findViewById(R.id.register_now);
         buttonsumbit = findViewById(R.id.submit);
         sharedPreferences = getSharedPreferences("yellow", MODE_PRIVATE);
 
@@ -48,7 +47,6 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 textviewerror.setVisibility(View.GONE);
-                progressbar.setVisibility(View.VISIBLE);
                 String email = String.valueOf(textinputedittextemail.getText());
                 String password = String.valueOf(textinputedittextpassword.getText());
 
@@ -59,7 +57,6 @@ public class Login extends AppCompatActivity {
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                progressbar.setVisibility(View.GONE);
                                 try {
                                     JSONObject jsonObject = new JSONObject(response);
                                     String status = jsonObject.getString("status");
@@ -111,7 +108,6 @@ public class Login extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        progressbar.setVisibility(View.GONE);
                         textviewerror.setText(error.getLocalizedMessage());
                         textviewerror.setVisibility(View.VISIBLE);
                     }
