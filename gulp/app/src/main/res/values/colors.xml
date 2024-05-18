@@ -39,4 +39,6 @@
     <color name="textColorPrimary">#000000</color>
     <color name="errorColor">#F44336</color>
     <color name="hintColor">#8A8A8A</color>
+    <color name="cardBackgroundColor">#FFFFFF</color>
+
 </resources>
