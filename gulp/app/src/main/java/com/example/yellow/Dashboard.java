@@ -3,67 +3,72 @@ package com.example.yellow;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import androidx.cardview.widget.CardView;
 
 public class Dashboard extends AppCompatActivity {
     TextView textUserName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        textUserName = findViewById(R.id.text_user_name);
 
-        Intent intent = getIntent();
-        String userName = intent.getStringExtra("name");
-        textUserName.setText("Welcome, "+ userName);
-        findViewById(R.id.btn_add_job).setOnClickListener(new View.OnClickListener() {
+
+        CardView btnProfile = findViewById(R.id.card_profile);
+        CardView btnAddJob = findViewById(R.id.card_add_job);
+        CardView btnStatus = findViewById(R.id.card_status);
+        CardView btnApplication = findViewById(R.id.card_application);
+        CardView btnChat = findViewById(R.id.card_chat);
+        CardView btnLogout = findViewById(R.id.card_logout);
+
+        btnProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Dashboard.this,addjob.class);
+                Intent intent = new Intent(Dashboard.this, profile.class);
                 startActivity(intent);
-                finish();
             }
         });
-        findViewById(R.id.btn_status).setOnClickListener(new View.OnClickListener() {
+
+        btnAddJob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Dashboard.this,Status.class);
+                Intent intent = new Intent(Dashboard.this, addjob.class);
                 startActivity(intent);
-                finish();
             }
         });
-        findViewById(R.id.btn_logout).setOnClickListener(new View.OnClickListener() {
+
+        btnStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Dashboard.this,Login.class);
+                Intent intent = new Intent(Dashboard.this, Status.class);
                 startActivity(intent);
-                finish();
             }
         });
-        findViewById(R.id.btn_profile).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Dashboard.this,profile.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-        findViewById(R.id.btn_applications).setOnClickListener(new View.OnClickListener() {
+
+        btnApplication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Dashboard.this, recieveapplication.class);
                 startActivity(intent);
-                finish();
             }
         });
-        findViewById(R.id.btn_chat).setOnClickListener(new View.OnClickListener() {
+
+        btnChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Dashboard.this, UserSelection.class);
+                startActivity(intent);
+            }
+        });
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Dashboard.this, Login.class);
                 startActivity(intent);
                 finish();
             }
