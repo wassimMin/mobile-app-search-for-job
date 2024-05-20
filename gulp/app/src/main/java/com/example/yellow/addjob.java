@@ -52,7 +52,7 @@ public class addjob extends AppCompatActivity {
                 jobreq = String.valueOf(textInputEditTextjobreq.getText());
                 jobsal = String.valueOf(textInputEditTextjobsal.getText());
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url = "http://192.168.1.52/memoire/addjob.php";
+                String url = "http://192.168.120.101/memoire/addjob.php";
 
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
