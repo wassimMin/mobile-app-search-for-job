@@ -20,6 +20,21 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Homeuser"
+            android:exported="false" />
+        <activity
+            android:name=".HomeFragment"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileFragment"
+            android:exported="false" />
+        <activity
+            android:name=".fragment_profile"
+            android:exported="false" />
+        <activity
+            android:name=".Homepageuser"
+            android:exported="false" />
+        <activity
             android:name=".UserSelection"
             android:exported="false" />
         <activity

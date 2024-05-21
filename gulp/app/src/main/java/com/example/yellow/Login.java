@@ -51,7 +51,7 @@ public class Login extends AppCompatActivity {
                 String password = String.valueOf(textinputedittextpassword.getText());
 
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url = "http://192.168.120.101/memoire/login.php";
+                String url = "http://192.168.1.52/memoire/login.php";
 
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
@@ -83,7 +83,7 @@ public class Login extends AppCompatActivity {
                                             intent.putExtra("userid",userid);
                                             startActivity(intent);
                                         }else if(userType == 0){
-                                            Intent intent = new Intent(Login.this, userhome.class);
+                                            Intent intent = new Intent(Login.this, Homeuser.class);
                                             startActivity(intent);
                                             intent.putExtra("name", name);
                                             intent.putExtra("email", email);

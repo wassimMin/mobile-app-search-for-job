@@ -74,4 +74,35 @@
         <item>Retail</item>
         <item>Hospitality</item>
     </string-array>
+    <string-array name="employment_types">
+        <item>Full-time</item>
+        <item>Part-time</item>
+        <item>Contract</item>
+    </string-array>
+    <string name="employment_type_prompt">Employment Type</string>
+    <string name="skills_type_prompt">Required Skills</string>
+    <string-array name="skills_types">
+        <item>SQL</item>
+        <item>Project Management</item>
+        <item>Communication</item>
+        <item>Problem Solving</item>
+        <item>Leadership</item>
+        <item>Programming</item>
+    </string-array>
+    <string name="experience_type_prompt">Experience</string>
+    <string-array name="experience_types">
+        <item>Entry Level</item>
+        <item>Mid Level</item>
+        <item>Senior Level</item>
+        <item>Manager</item>
+    </string-array>
+    <string name="category_type_prompt">Job Category</string>
+    <string name="education_type_prompt">Education Level</string>
+    <string-array name="education_types">
+        <item>High School Diploma</item>
+        <item>Associate Degree</item>
+        <item>Bachelor  Degree</item>
+        <item>Master Degree</item>
+        <item>Doctorate</item>
+    </string-array>
 </resources>

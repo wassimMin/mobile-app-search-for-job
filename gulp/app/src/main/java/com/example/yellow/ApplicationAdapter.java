@@ -125,7 +125,7 @@ public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.
 
         String applicationId = application.getId();
 
-        String url = "http://192.168.120.101/memoire/delete_application.php?application_id=" + applicationId;
+        String url = "http://192.168.1.52/memoire/delete_application.php?application_id=" + applicationId;
 
         StringRequest request = new StringRequest(Request.Method.DELETE, url,
                 new Response.Listener<String>() {
@@ -152,7 +152,7 @@ public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.
     }
 
     private void updateResponse(AplicationItem application, String response, String message) {
-        String url = "http://192.168.120.101/memoire/set_response.php";
+        String url = "http://192.168.1.52/memoire/set_response.php";
         RequestQueue queue = Volley.newRequestQueue(context);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
