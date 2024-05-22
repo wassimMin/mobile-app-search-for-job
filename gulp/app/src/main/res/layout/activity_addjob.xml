@@ -141,7 +141,7 @@
                 android:id="@+id/requiredskills"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter Required Skills"
+                android:hint="Enter Required Skills(separate with ,)"
                 android:textColor="@color/textColorPrimary"
                 android:drawableStart="@drawable/ic_skills"
                 android:drawablePadding="8dp"/>

@@ -1,5 +1,6 @@
 package com.example.yellow;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,8 +14,6 @@ public class Homeuser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homeuser);
-
-        // Load the default fragment
         if (savedInstanceState == null) {
             loadFragment(new HomeFragment());
         }

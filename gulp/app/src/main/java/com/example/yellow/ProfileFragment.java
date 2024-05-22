@@ -16,7 +16,8 @@ public class ProfileFragment extends Fragment {
     TextView nameprofile;
     TextView emailprofile;
     SharedPreferences sharedPreferences;
-    Button logout;
+    Button logout,filter;
+
 
     @Nullable
     @Override
@@ -31,10 +32,12 @@ public class ProfileFragment extends Fragment {
         nameprofile = view.findViewById(R.id.profile_name);
         emailprofile = view.findViewById(R.id.profile_email);
         logout = view.findViewById(R.id.btn_logout);
+        filter = view.findViewById(R.id.btn_job);
 
         sharedPreferences = requireActivity().getSharedPreferences("yellow", getContext().MODE_PRIVATE);
         String username = sharedPreferences.getString("name", "");
         String useremail = sharedPreferences.getString("email", "");
+        int userid = sharedPreferences.getInt("userid",0);
         nameprofile.setText(username);
         emailprofile.setText(useremail);
 
@@ -43,6 +46,15 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), Login.class);
                 startActivity(intent);
+                requireActivity().finish();
+            }
+        });
+        filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1= new Intent(getActivity(),JobFilter.class);
+                intent1.putExtra("userid",userid);
+                startActivity(intent1);
                 requireActivity().finish();
             }
         });

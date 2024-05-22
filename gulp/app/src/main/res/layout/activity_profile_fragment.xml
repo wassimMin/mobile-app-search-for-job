@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -23,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text=""
+            android:background="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
             android:paddingTop="8dp"/>
@@ -33,6 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text=""
+            android:background="@color/black"
             android:textSize="16sp"
             android:paddingTop="4dp"/>
         <LinearLayout
@@ -51,7 +54,7 @@
                 android:id="@+id/btn_job"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Job Information"
+                android:text="Job Filter Information"
                 android:layout_marginTop="8dp"/>
 
 

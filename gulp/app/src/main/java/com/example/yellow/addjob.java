@@ -88,7 +88,6 @@ public class addjob extends AppCompatActivity {
                     textViewError.setVisibility(View.VISIBLE);
                 }
 
-                // Proceed with form submission
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
                 String url = "http://192.168.1.52/memoire/addjob.php";
 

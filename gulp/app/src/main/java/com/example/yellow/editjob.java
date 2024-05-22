@@ -91,7 +91,7 @@ public class editjob extends AppCompatActivity {
                         if (response.equals("success")) {
                             Intent intent = new Intent(editjob.this, Status.class);
                             startActivity(intent);
-                            finish();  
+                            finish();
                         } else {
                             Toast.makeText(editjob.this, response, Toast.LENGTH_SHORT).show();
                         }
