@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ public class profileuser extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     private GridLayout skillsGrid;
     int userId;
+    Button backhome;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,7 +42,7 @@ public class profileuser extends AppCompatActivity {
         String username = sharedPreferences.getString("name", "");
         String useremail = sharedPreferences.getString("email", "");
         userId= sharedPreferences.getInt("userid",0);
-
+        backhome = findViewById(R.id.back_to_home_button);
         name = findViewById(R.id.name);
         location = findViewById(R.id.location);
         email = findViewById(R.id.email);
@@ -51,6 +53,14 @@ public class profileuser extends AppCompatActivity {
         email.setText(useremail);
         skillsGrid = findViewById(R.id.skills_grid);
         fetchUserProfile();
+        backhome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent  = new Intent(profileuser.this,Homeuser.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
 
