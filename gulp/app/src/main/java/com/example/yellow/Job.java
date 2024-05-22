@@ -1,31 +1,75 @@
 package com.example.yellow;
 
 public class Job {
-    private String id;
-    private String jobName;
-    private String jobPosition;
-    private String jobRequirements;
-    private String jobSalaire;
-    public Job(String id,String jobName, String jobPosition, String jobRequirements,String jobSalaire) {
+    private int id;
+    private String jobTitle;
+    private String companyName;
+    private String employmentType;
+    private String location;
+    private String requiredSkills;
+    private String experienceLevel;
+    private String educationLevel;
+    private String salaryRange;
+    private long createdAt;
+    private int userId;
+
+    public Job(int id, String jobTitle, String companyName, String employmentType, String location,
+               String requiredSkills, String experienceLevel, String educationLevel, String salaryRange,
+               long createdAt, int userId) {
         this.id = id;
-        this.jobName = jobName;
-        this.jobPosition = jobPosition;
-        this.jobRequirements = jobRequirements;
-        this.jobSalaire = jobSalaire;
+        this.jobTitle = jobTitle;
+        this.companyName = companyName;
+        this.employmentType = employmentType;
+        this.location = location;
+        this.requiredSkills = requiredSkills;
+        this.experienceLevel = experienceLevel;
+        this.educationLevel = educationLevel;
+        this.salaryRange = salaryRange;
+        this.createdAt = createdAt;
+        this.userId = userId;
     }
-    public String getId(){
+
+    public int getId() {
         return id;
     }
-    public String getJobName() {
-        return jobName;
+
+    public String getJobTitle() {
+        return jobTitle;
     }
 
-    public String getJobPosition() {
-        return jobPosition;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public String getJobRequirements() {
-        return jobRequirements;
+    public String getEmploymentType() {
+        return employmentType;
     }
-    public String getJobSalaire(){return jobSalaire;}
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getRequiredSkills() {
+        return requiredSkills;
+    }
+
+    public String getExperienceLevel() {
+        return experienceLevel;
+    }
+
+    public String getEducationLevel() {
+        return educationLevel;
+    }
+
+    public String getSalaryRange() {
+        return salaryRange;
+    }
+
+    public long getCreatedAt() {
+        return createdAt;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
 }

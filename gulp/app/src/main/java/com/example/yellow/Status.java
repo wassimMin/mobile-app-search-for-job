@@ -3,7 +3,6 @@ package com.example.yellow;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -16,7 +15,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -31,6 +29,7 @@ public class Status extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<Job> jobList;
     private JobAdapter jobAdapter;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,7 @@ public class Status extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         jobList = new ArrayList<>();
-        jobAdapter = new JobAdapter(jobList);
+        jobAdapter = new JobAdapter(this,jobList);
         recyclerView.setAdapter(jobAdapter);
         ImageButton backButton = findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -51,8 +50,7 @@ public class Status extends AppCompatActivity {
                 finish();
             }
         });
-
-        fetchJobs();
+        intent = getIntent();fetchJobs();
     }
 
     private void fetchJobs() {
@@ -71,13 +69,17 @@ public class Status extends AppCompatActivity {
                             try {
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject jobObject = response.getJSONObject(i);
-                                    String jobId = jobObject.getString("job_id");
-                                    String jobName = jobObject.getString("jobname");
-                                    String jobPosition = jobObject.getString("jobpos");
-                                    String jobRequirements = jobObject.getString("jobreq");
-                                    String jobSalaire = jobObject.getString("jobsal");
+                                    String jobId = jobObject.getString("id");
+                                    String jobName = jobObject.getString("job_title");
+                                    String companyName = jobObject.getString("company_name");
+                                    String employmenttype = jobObject.getString("employment_type");
+                                    String location = jobObject.getString("location");
+                                    String requiredskills = jobObject.getString("required_skills");
+                                    String jobSalaire = jobObject.getString("salary_range");
+                                    String experienceLevel = jobObject.getString("experience_level");
+                                    String educationlevel = jobObject.getString("education_level");
 
-                                    Job job = new Job(jobId,jobName, jobPosition, jobRequirements,jobSalaire);
+                                    Job job = new Job(Integer.valueOf(jobId), jobName, companyName, employmenttype, location, requiredskills, experienceLevel, educationlevel, jobSalaire, 0, 0);
                                     jobList.add(job);
                                 }
                                 jobAdapter.notifyDataSetChanged();
@@ -98,56 +100,5 @@ public class Status extends AppCompatActivity {
                 });
 
         queue.add(jsonArrayRequest);
-    }
-    public void onEditButtonClick(View view) {
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        int position = recyclerView.getChildLayoutPosition((View) view.getParent().getParent());
-        Job jobToEdit = jobList.get(position);
-
-        Intent intent = new Intent(this, editjob.class);
-        intent.putExtra("job_id", jobToEdit.getId());
-        intent.putExtra("job_name", jobToEdit.getJobName());
-        intent.putExtra("job_position", jobToEdit.getJobPosition());
-        intent.putExtra("job_requirements", jobToEdit.getJobRequirements());
-        intent.putExtra("job_salaire", jobToEdit.getJobSalaire());
-        startActivity(intent);
-    }
-
-    public void onDeleteButtonClick(View view) {
-        int position = recyclerView.getChildAdapterPosition((View) view.getParent().getParent());
-        if (position != RecyclerView.NO_POSITION) {
-            Job jobToDelete = jobList.get(position);
-            deleteJobFromDatabase(jobToDelete);
-        }
-    }
-
-    private void deleteJobFromDatabase(Job job) {
-        String jobId = job.getId();
-
-        String url = "http://192.168.1.52/memoire/deletejob.php?job_id=" + jobId;
-
-        StringRequest request = new StringRequest(Request.Method.DELETE, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Handle the response from the server if needed
-                        // For example, show a success message
-                        Toast.makeText(Status.this, "Job deleted successfully", Toast.LENGTH_SHORT).show();
-                        // Remove the job from the list and notify the adapter
-                        jobList.remove(job);
-                        jobAdapter.notifyDataSetChanged();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                        Toast.makeText(Status.this, "Error deleting job: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-        // Add the request to the RequestQueue
-        RequestQueue queue = Volley.newRequestQueue(this);
-        queue.add(request);
     }
 }

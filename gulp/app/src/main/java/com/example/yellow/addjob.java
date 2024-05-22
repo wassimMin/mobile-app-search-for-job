@@ -3,6 +3,7 @@ package com.example.yellow;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -31,12 +32,14 @@ public class addjob extends AppCompatActivity {
     Button buttonSubmit;
     String jobTitle, companyName, employmentType, location, requiredSkills, experienceLevel, educationLevel, salaryRange;
     TextView textViewError;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addjob);
-
+        intent = getIntent();
+        int userId = intent.getIntExtra("userid",0);
         textInputEditTextJobTitle = findViewById(R.id.jobtitle);
         textInputEditTextCompanyName = findViewById(R.id.companyname);
         textInputEditTextLocation = findViewById(R.id.locationtext);
@@ -47,7 +50,6 @@ public class addjob extends AppCompatActivity {
         experienceLevelSpinner = findViewById(R.id.experience_type_spinner);
 
         requiredSkillsTextView = findViewById(R.id.requiredskills);
-
 
         buttonSubmit = findViewById(R.id.submit);
         textViewError = findViewById(R.id.error);
@@ -76,9 +78,11 @@ public class addjob extends AppCompatActivity {
 
                 if (jobTitle == null || jobTitle.isEmpty() || companyName == null || companyName.isEmpty() || location == null || location.isEmpty() || salaryRange == null || salaryRange.isEmpty()) {
                     textViewError.setText("All fields are required");
+                    System.out.println(jobTitle+" "+companyName+" "+location+" "+ salaryRange);
                     textViewError.setVisibility(View.VISIBLE);
                     return;
                 }
+
                 if(requiredSkills == null || requiredSkills.isEmpty()){
                     textViewError.setText("problem rah f required skills");
                     textViewError.setVisibility(View.VISIBLE);
@@ -120,6 +124,7 @@ public class addjob extends AppCompatActivity {
                         params.put("experience_level", experienceLevel);
                         params.put("education_level", educationLevel);
                         params.put("salary_range", salaryRange);
+                        params.put("userid", String.valueOf(userId));
                         return params;
                     }
                 };

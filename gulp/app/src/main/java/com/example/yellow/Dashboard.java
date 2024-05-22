@@ -10,6 +10,7 @@ import androidx.cardview.widget.CardView;
 
 public class Dashboard extends AppCompatActivity {
     TextView textUserName;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +18,8 @@ public class Dashboard extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
 
-
+        intent = getIntent();
+        int userid = intent.getIntExtra("userid",0);
         CardView btnProfile = findViewById(R.id.card_profile);
         CardView btnAddJob = findViewById(R.id.card_add_job);
         CardView btnStatus = findViewById(R.id.card_status);
@@ -37,6 +39,7 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Dashboard.this, addjob.class);
+                intent.putExtra("userid",userid);
                 startActivity(intent);
             }
         });
@@ -45,6 +48,7 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Dashboard.this, Status.class);
+                intent.putExtra("userid",userid);
                 startActivity(intent);
             }
         });

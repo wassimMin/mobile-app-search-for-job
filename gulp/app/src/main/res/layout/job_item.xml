@@ -1,75 +1,96 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:background="@drawable/rounded_background"
+    android:orientation="vertical"
+    android:background="@drawable/card_background"
     android:padding="16dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="20dp"
-    android:minHeight="120dp"
-    android:gravity="center_vertical">
-
-    <TextView
-        android:id="@+id/text_job_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="18sp"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:layout_marginEnd="8dp"/>
-
-    <TextView
-        android:id="@+id/text_job_position"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="16sp"
-        android:textColor="@android:color/darker_gray"
-        android:layout_marginEnd="8dp"/>
-
-    <TextView
-        android:id="@+id/text_job_requirements"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="16sp"
-        android:textColor="@android:color/darker_gray"/>
-
-    <TextView
-        android:id="@+id/text_job_jobsal"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="16sp"
-        android:textColor="@android:color/darker_gray"/>
+    android:layout_margin="8dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingBottom="8dp">
 
-        <Button
-            android:id="@+id/btn_delete_job"
+        <TextView
+            android:id="@+id/text_job_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Delete"
-            android:backgroundTint="@color/blue"
-            android:onClick="onDeleteButtonClick"
-            android:minWidth="80dp"
-            android:minHeight="40dp"
-            android:padding="8dp"/>
+            android:padding="4dp"
+            android:background="@drawable/status_background"
+            android:text="Click Read More To Modify"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btn_edit_job"
-            android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Edit"
-            android:backgroundTint="@color/blue"
-            android:onClick="onEditButtonClick"
-            android:minWidth="80dp"
-            android:minHeight="40dp"
-            android:padding="8dp"/>
+            android:layout_weight="1"
+            android:paddingStart="8dp"
+            android:text=""
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/image_job"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/icon_job"
+            android:scaleType="centerCrop"
+            android:layout_marginEnd="16dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_job_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_job_salaire"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Salaire: "
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp" />
+
+            <TextView
+                android:id="@+id/text_job_experience"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Experience Level:  "
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_read_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="@color/blue"
+        android:text="Read More"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp" />
 </LinearLayout>

@@ -35,7 +35,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class userhome extends AppCompatActivity implements JobAdapteruser.OnApplyClickListener {
+public class userhome extends AppCompatActivity{
     private RecyclerView recyclerView;
     private List<Job> jobList;
     private JobAdapteruser JobAdapteruser;
@@ -58,7 +58,7 @@ public class userhome extends AppCompatActivity implements JobAdapteruser.OnAppl
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         jobList = new ArrayList<>();
-        JobAdapteruser = new JobAdapteruser(jobList, this);
+//        JobAdapteruser = new JobAdapteruser(jobList, this);
         recyclerView.setAdapter(JobAdapteruser);
         fetchJobs();
         Intent intent = getIntent();
@@ -158,8 +158,8 @@ public class userhome extends AppCompatActivity implements JobAdapteruser.OnAppl
                                     String jobRequirements = jobObject.getString("jobreq");
                                     String jobSalaire = jobObject.getString("jobsal");
 
-                                    Job job = new Job(jobId,jobName, jobPosition, jobRequirements,jobSalaire);
-                                    jobList.add(job);
+//                                    Job job = new Job(jobId,jobName, jobPosition, jobRequirements,jobSalaire);
+//                                    jobList.add(job);
                                 }
                                 JobAdapteruser.notifyDataSetChanged();
                             } catch (JSONException e) {
@@ -181,22 +181,22 @@ public class userhome extends AppCompatActivity implements JobAdapteruser.OnAppl
         queue.add(jsonArrayRequest);
     }
 
-    @Override
-    public void onApplyClick(int position) {
-        // Get the corresponding job object
-        Job job = jobList.get(position);
-
-        // Store job details in SharedPreferences
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("jobId", job.getId());
-        editor.putString("jobName", job.getJobName());
-        editor.putString("jobPosition", job.getJobPosition());
-        editor.putString("jobRequirements", job.getJobRequirements());
-        editor.putString("jobSalaire", job.getJobSalaire());
-        editor.apply();
-
-        // Start the applyjob activity
-        Intent intent = new Intent(this, applyjob.class);
-        startActivity(intent);
-    }
+//    @Override
+//    public void onApplyClick(int position) {
+//        // Get the corresponding job object
+//        Job job = jobList.get(position);
+//
+//        // Store job details in SharedPreferences
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putString("jobId", job.getId());
+//        editor.putString("jobName", job.getJobName());
+//        editor.putString("jobPosition", job.getJobPosition());
+//        editor.putString("jobRequirements", job.getJobRequirements());
+//        editor.putString("jobSalaire", job.getJobSalaire());
+//        editor.apply();
+//
+//        // Start the applyjob activity
+//        Intent intent = new Intent(this, applyjob.class);
+//        startActivity(intent);
+//    }
 }

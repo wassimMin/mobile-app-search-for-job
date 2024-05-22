@@ -67,10 +67,10 @@ public class JobAdapteruser extends RecyclerView.Adapter<JobAdapteruser.ViewHold
         }
 
         public void bind(Job job) {
-            textJobName.setText(job.getJobName());
-            textJobPosition.setText(job.getJobPosition());
-            textJobRequirements.setText(job.getJobRequirements());
-            textJobSalaire.setText(job.getJobSalaire());
+//            textJobName.setText(job.getJobName());
+//            textJobPosition.setText(job.getJobPosition());
+//            textJobRequirements.setText(job.getJobRequirements());
+//            textJobSalaire.setText(job.getJobSalaire());
         }
     }
 

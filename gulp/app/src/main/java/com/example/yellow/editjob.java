@@ -1,116 +1,119 @@
 package com.example.yellow;
 
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.Spinner;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.yellow.R;
 import com.google.android.material.textfield.TextInputEditText;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class editjob extends AppCompatActivity {
+    private TextInputEditText jobTitle, companyName, location, requiredSkills, salaryRange;
+    private Spinner employmentType, experienceType, educationType;
+    private Button submitButton;
+    private String jobId;
 
-    TextInputEditText textInputEditTextJobName, textInputEditTextJobPosition, textInputEditTextJobRequirements, textInputEditTextJobSalaire;
-    Button editButton;
-    TextView textViewError;
-    ProgressBar progressBar;
-    String jobId,jobName,jobPosition,jobRequirements,jobSalaire;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editjob);
-        editButton = findViewById(R.id.edit);
-        textViewError = findViewById(R.id.error);
-        progressBar = findViewById(R.id.loading);
-        ImageButton backButton = findViewById(R.id.back_button);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Status.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+
+        jobTitle = findViewById(R.id.jobtitle);
+        companyName = findViewById(R.id.companyname);
+        location = findViewById(R.id.locationtext);
+        requiredSkills = findViewById(R.id.requiredskills);
+        salaryRange = findViewById(R.id.salary_range_input);
+        employmentType = findViewById(R.id.employment_type_spinner);
+        experienceType = findViewById(R.id.experience_type_spinner);
+        educationType = findViewById(R.id.education_type_spinner);
+        submitButton = findViewById(R.id.submit);
+
         Intent intent = getIntent();
-        if (intent != null) {
-             jobId = intent.getStringExtra("job_id");
-             jobName = intent.getStringExtra("job_name");
-             jobPosition = intent.getStringExtra("job_position");
-             jobRequirements = intent.getStringExtra("job_requirements");
-             jobSalaire = intent.getStringExtra("job_salaire");
+        jobId = intent.getStringExtra("jobid");
+        jobTitle.setText(intent.getStringExtra("job_title"));
+        companyName.setText(intent.getStringExtra("job_companyname"));
+        location.setText(intent.getStringExtra("job_location"));
+        requiredSkills.setText(intent.getStringExtra("job_requiredskills"));
+        salaryRange.setText(intent.getStringExtra("job_salary"));
 
-            textInputEditTextJobName = findViewById(R.id.job_name);
-            textInputEditTextJobPosition = findViewById(R.id.job_position);
-            textInputEditTextJobRequirements = findViewById(R.id.job_requirements);
-            textInputEditTextJobSalaire = findViewById(R.id.job_salaire);
+        setSpinnerSelection(employmentType, intent.getStringExtra("job_employment"), R.array.employment_types);
+        setSpinnerSelection(experienceType, intent.getStringExtra("job_experience"), R.array.experience_types);
+        setSpinnerSelection(educationType, intent.getStringExtra("job_education"), R.array.education_types);
 
-            textInputEditTextJobName.setText(jobName);
-            textInputEditTextJobPosition.setText(jobPosition);
-            textInputEditTextJobRequirements.setText(jobRequirements);
-            textInputEditTextJobSalaire.setText(jobSalaire);
-        }
-        editButton.setOnClickListener(new View.OnClickListener() {
+        submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editJob();
+                updateJob();
             }
         });
     }
 
-    private void editJob() {
-        String jobName = textInputEditTextJobName.getText().toString().trim();
-        String jobPosition = textInputEditTextJobPosition.getText().toString().trim();
-        String jobRequirements = textInputEditTextJobRequirements.getText().toString().trim();
-        String jobSalaire = textInputEditTextJobSalaire.getText().toString().trim();
+    private void setSpinnerSelection(Spinner spinner, String value, int arrayResId) {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                arrayResId, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        if (value != null) {
+            int spinnerPosition = adapter.getPosition(value);
+            spinner.setSelection(spinnerPosition);
+        }
+    }
 
-        progressBar.setVisibility(View.VISIBLE);
+    private void updateJob() {
+        final String title = jobTitle.getText().toString().trim();
+        final String company = companyName.getText().toString().trim();
+        final String jobLocation = location.getText().toString().trim();
+        final String skills = requiredSkills.getText().toString().trim();
+        final String salary = salaryRange.getText().toString().trim();
+        final String employment = employmentType.getSelectedItem().toString();
+        final String experience = experienceType.getSelectedItem().toString();
+        final String education = educationType.getSelectedItem().toString();
+
+        String url = "http://192.168.1.52/memoire/editjob.php";
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://192.168.1.52/memoire/editjob.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        progressBar.setVisibility(View.GONE);
                         if (response.equals("success")) {
-                            Toast.makeText(editjob.this, "Job details updated successfully", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(editjob.this, Status.class);
+                            startActivity(intent);
+                            finish();  
                         } else {
-                            textViewError.setText(response);
-                            textViewError.setVisibility(View.VISIBLE);
+                            Toast.makeText(editjob.this, response, Toast.LENGTH_SHORT).show();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progressBar.setVisibility(View.GONE);
-                textViewError.setText(error.getMessage());
-                textViewError.setVisibility(View.VISIBLE);
+                Toast.makeText(editjob.this, "Error updating job", Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("job_id", jobId);
-                params.put("jobname", jobName);
-                params.put("jobpos", jobPosition);
-                params.put("jobreq", jobRequirements);
-                params.put("jobsal", jobSalaire);
+                params.put("id", jobId);
+                params.put("job_title", title);
+                params.put("job_companyname", company);
+                params.put("job_location", jobLocation);
+                params.put("job_requiredskills", skills);
+                params.put("job_salary", salary);
+                params.put("job_employment", employment);
+                params.put("job_experience", experience);
+                params.put("job_education", education);
                 return params;
             }
         };
