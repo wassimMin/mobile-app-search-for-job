@@ -36,7 +36,7 @@ public class HomeFragment extends Fragment {
         itemList.add(new HomeItem(R.drawable.chat, "Chat", "Chat Here"));
         itemList.add(new HomeItem(R.drawable.job, "Jobs", "Check Jobs Here"));
 
-        homeAdapter = new HomeAdapter(itemList);
+        homeAdapter = new HomeAdapter(itemList,getContext());
         recyclerView.setAdapter(homeAdapter);
     }
 }

@@ -9,7 +9,7 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="lavender">#8692f7</color>
-    <color name="light_gray">#d3d3d3</color>
+    <color name="light_gray">#F0F0F0</color>
     <color name="home_background">#f2f5f8</color>
     <color name="banner_background">#F1E9CE</color>
     <color name="banner_background_light">#56F1E9CE</color>
@@ -30,7 +30,7 @@
     <color name="background_color">#F5F5F5</color>
     <color name="button_pressed_color">#1976D2</color>
     <color name="button_normal_color">#2196F3</color>
-    <color name="dark_gray">#444444</color>
+    <color name="dark_gray">#404040</color>
     <color name="blue">#2196F3</color>
     <color name="colorPrimary">#246EE9</color>
     <color name="colorAccent">#FF4081</color>
@@ -40,5 +40,6 @@
     <color name="errorColor">#F44336</color>
     <color name="hintColor">#8A8A8A</color>
     <color name="cardBackgroundColor">#FFFFFF</color>
+    <color name="gray">#808080</color>
 
 </resources>

@@ -1,5 +1,7 @@
 package com.example.yellow;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +14,12 @@ import java.util.List;
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
 
     private List<HomeItem> itemList;
+    private Context context;
 
-    public HomeAdapter(List<HomeItem> itemList) {
+    public HomeAdapter(List<HomeItem> itemList, Context context) {
         this.itemList = itemList;
+        this.context = context;
     }
-
     @NonNull
     @Override
     public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -26,11 +29,24 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
-        HomeItem item = itemList.get(position);
+        final HomeItem item = itemList.get(position);
         holder.imageView.setImageResource(item.getImageResource());
         holder.titleView.setText(item.getTitle());
         holder.subtitleView.setText(item.getSubtitle());
+
+        // Set click listener
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (item.getTitle().equals("Profile")) {
+                    // Open profile activity here
+                    Intent intent = new Intent(context, profileuser.class);
+                    context.startActivity(intent);
+                }
+            }
+        });
     }
+
 
     @Override
     public int getItemCount() {

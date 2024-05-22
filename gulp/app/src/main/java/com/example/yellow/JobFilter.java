@@ -28,7 +28,7 @@ import java.util.Map;
 public class JobFilter extends AppCompatActivity {
 
     private Spinner employmentTypeSpinner, experienceTypeSpinner, educationTypeSpinner;
-    private TextInputEditText locationEditText, skillsEditText;
+    private TextInputEditText description,locationEditText, skillsEditText;
     private Button submitButton;
     TextView textViewError;
     Intent intent;
@@ -43,6 +43,7 @@ public class JobFilter extends AppCompatActivity {
         employmentTypeSpinner = findViewById(R.id.employment_type_spinner);
         experienceTypeSpinner = findViewById(R.id.experience_type_spinner);
         educationTypeSpinner = findViewById(R.id.education_type_spinner);
+        description = findViewById(R.id.descriptiontext);
         locationEditText = findViewById(R.id.locationtext);
         skillsEditText = findViewById(R.id.requiredskills);
         submitButton = findViewById(R.id.submit);
@@ -86,6 +87,7 @@ public class JobFilter extends AppCompatActivity {
                                 educationTypeSpinner.setSelection(getIndex(educationTypeSpinner, profileData.getString("education_level")));
                                 locationEditText.setText(profileData.getString("location"));
                                 skillsEditText.setText(profileData.getString("skills"));
+                                description.setText(profileData.getString("description"));
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -111,6 +113,7 @@ public class JobFilter extends AppCompatActivity {
 
     private void submitFilter() {
         textViewError.setVisibility(View.GONE);
+        String description1 = description.getText().toString().trim();
         String employmentType = employmentTypeSpinner.getSelectedItem().toString();
         String experienceType = experienceTypeSpinner.getSelectedItem().toString();
         String educationType = educationTypeSpinner.getSelectedItem().toString();
@@ -143,6 +146,7 @@ public class JobFilter extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
+                params.put("description",description1);
                 params.put("location", location);
                 params.put("employment_type", employmentType);
                 params.put("required_skills", skills);
