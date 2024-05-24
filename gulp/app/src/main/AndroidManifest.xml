@@ -20,6 +20,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Applyjob"
+            android:exported="false"
+            android:label="@string/title_activity_applyjob"
+            android:theme="@style/Theme.Yellow" />
+        <activity
             android:name=".Showjobs"
             android:exported="false"
             android:label="@string/title_activity_showjobs"

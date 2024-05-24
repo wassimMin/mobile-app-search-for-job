@@ -43,8 +43,8 @@ public class JobUserAdapter extends RecyclerView.Adapter<JobUserAdapter.JobViewH
         holder.readMoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle the read more button click
-                // For example, start a new activity with job details
+                Intent intent = new Intent(context,Applyjob.class);
+                context.startActivity(intent);
             }
         });
     }

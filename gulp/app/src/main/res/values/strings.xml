@@ -106,4 +106,5 @@
         <item>Doctorate</item>
     </string-array>
     <string name="title_activity_showjobs">Showjobs</string>
+    <string name="title_activity_applyjob">Applyjob</string>
 </resources>
