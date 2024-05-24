@@ -105,4 +105,5 @@
         <item>Master Degree</item>
         <item>Doctorate</item>
     </string-array>
+    <string name="title_activity_showjobs">Showjobs</string>
 </resources>

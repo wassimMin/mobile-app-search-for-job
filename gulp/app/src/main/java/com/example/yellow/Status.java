@@ -79,7 +79,7 @@ public class Status extends AppCompatActivity {
                                     String experienceLevel = jobObject.getString("experience_level");
                                     String educationlevel = jobObject.getString("education_level");
 
-                                    Job job = new Job(Integer.valueOf(jobId), jobName, companyName, employmenttype, location, requiredskills, experienceLevel, educationlevel, jobSalaire, 0, 0);
+                                    Job job = new Job(Integer.valueOf(jobId), jobName, companyName, employmenttype, location, requiredskills, experienceLevel, educationlevel, jobSalaire, "", 0);
                                     jobList.add(job);
                                 }
                                 jobAdapter.notifyDataSetChanged();

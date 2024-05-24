@@ -10,12 +10,12 @@ public class Job {
     private String experienceLevel;
     private String educationLevel;
     private String salaryRange;
-    private long createdAt;
+    private String createdAt;
     private int userId;
 
     public Job(int id, String jobTitle, String companyName, String employmentType, String location,
                String requiredSkills, String experienceLevel, String educationLevel, String salaryRange,
-               long createdAt, int userId) {
+               String createdAt, int userId) {
         this.id = id;
         this.jobTitle = jobTitle;
         this.companyName = companyName;
@@ -65,7 +65,7 @@ public class Job {
         return salaryRange;
     }
 
-    public long getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 

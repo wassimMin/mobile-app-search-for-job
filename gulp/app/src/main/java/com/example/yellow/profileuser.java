@@ -81,7 +81,14 @@ public class profileuser extends AppCompatActivity {
                                 experience.setText(profileData.getString("experience_level"));
                                 education.setText(profileData.getString("education_level"));
                                 String userSkills = profileData.getString("required_skills");
-                                populateSkillsGrid(userSkills);
+                                String[] skillsArray = userSkills.split(",");
+                                skillsGrid.removeAllViews();
+                                for(String skill : skillsArray){
+                                    TextView skillTextView = new TextView(profileuser.this);
+                                    skillTextView.setText(skill.trim());
+                                    skillTextView.setPadding(8,8,8,8);
+                                    skillsGrid.addView(skillTextView);
+                                }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -102,24 +109,5 @@ public class profileuser extends AppCompatActivity {
             }
         };
         queue.add(stringRequest);
-    }
-    private void populateSkillsGrid(String skills) {
-        String[] skillsArray = skills.split(",");
-
-        skillsGrid.removeAllViews();
-
-        for (String skill : skillsArray) {
-            TextView skillTextView = new TextView(this);
-            skillTextView.setText(skill.trim());
-            skillTextView.setTextSize(14);
-            skillTextView.setTextColor(getResources().getColor(R.color.black));
-            skillTextView.setPadding(8, 8, 8, 8);
-
-            GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-            params.setMargins(8, 8, 8, 8);
-            skillTextView.setLayoutParams(params);
-
-            skillsGrid.addView(skillTextView);
-        }
     }
 }

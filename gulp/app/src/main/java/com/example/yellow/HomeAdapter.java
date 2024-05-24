@@ -39,8 +39,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             @Override
             public void onClick(View v) {
                 if (item.getTitle().equals("Profile")) {
-                    // Open profile activity here
                     Intent intent = new Intent(context, profileuser.class);
+                    context.startActivity(intent);
+                }else if(item.getTitle().equals("Jobs")){
+                    Intent intent = new Intent(context,Showjobs.class);
                     context.startActivity(intent);
                 }
             }
