@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".recieveapplication">
+    android:background="#f7f7f7"
+    tools:context=".Receiveapplicationdetails">
 
     <TextView
         android:id="@+id/job_title"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@android:color/black"
         android:gravity="center"
@@ -22,7 +23,7 @@
 
     <TextView
         android:id="@+id/user_name"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:textColor="@android:color/black"
@@ -33,7 +34,7 @@
 
     <TextView
         android:id="@+id/user_email"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:textColor="@android:color/black"
@@ -44,7 +45,7 @@
 
     <TextView
         android:id="@+id/user_phone"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:textColor="@android:color/black"
@@ -55,7 +56,7 @@
 
     <TextView
         android:id="@+id/application_date"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:textColor="@android:color/black"
@@ -66,25 +67,92 @@
 
     <TextView
         android:id="@+id/application_status"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:textColor="@android:color/black"
         app:layout_constraintTop_toBottomOf="@+id/application_date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="16dp" />
 
-    <Button
-        android:id="@+id/btn_back"
-        android:layout_width="wrap_content"
+    <!-- Profile and CV Buttons -->
+    <LinearLayout
+        android:id="@+id/profile_cv_buttons_layout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Back"
-        android:backgroundTint="?attr/colorPrimary"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/application_status"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp">
+
+        <Button
+            android:id="@+id/btn_view_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="See Profile"
+            android:backgroundTint="?attr/colorPrimary"
+            android:textColor="@android:color/white"
+            android:layout_marginEnd="8dp"
+            android:padding="12dp" />
+
+        <Button
+            android:id="@+id/btn_view_cv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View CV"
+            android:backgroundTint="?attr/colorPrimary"
+            android:textColor="@android:color/white"
+            android:layout_marginStart="8dp"
+            android:padding="12dp" />
+    </LinearLayout>
+
+    <!-- Acceptance/Refusal Section -->
+    <EditText
+        android:id="@+id/response_message"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Write your message here"
+        android:layout_marginTop="16dp"
+        android:padding="12dp"
+        android:background="@drawable/edittext_background"
+        app:layout_constraintTop_toBottomOf="@id/profile_cv_buttons_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="32dp" /> <!-- Increased bottom margin here -->
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/response_message"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/btn_accept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Accept"
+            android:backgroundTint="@android:color/holo_green_light"
+            android:textColor="@android:color/white"
+            android:layout_marginEnd="8dp"
+            android:padding="12dp" />
+
+        <Button
+            android:id="@+id/btn_refuse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Refuse"
+            android:backgroundTint="@android:color/holo_red_light"
+            android:textColor="@android:color/white"
+            android:layout_marginStart="8dp"
+            android:padding="12dp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

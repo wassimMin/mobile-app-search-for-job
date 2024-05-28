@@ -38,7 +38,6 @@ public class application extends AppCompatActivity {
         responseAdapter = new ResponseAdapter(this,responseList);
         recyclerView.setAdapter(responseAdapter);
 
-        // Fetch response data from the server
         fetchResponses();
     }
 
