@@ -104,10 +104,8 @@ public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.
             fos.write(cvPdfData);
             fos.close();
 
-            // Get the URI for the temporary file
             Uri pdfUri = FileProvider.getUriForFile(context, context.getPackageName() + ".provider", pdfFile);
 
-            // Open the PDF file in the browser
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setDataAndType(pdfUri, "application/pdf");
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);

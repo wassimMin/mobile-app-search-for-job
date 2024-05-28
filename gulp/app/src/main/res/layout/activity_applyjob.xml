@@ -32,7 +32,7 @@
             android:text="Apply Job"
             android:textSize="40sp"
             android:textStyle="bold"
-            android:textColor="#246EE9"
+            android:textColor="@color/blue2"
             android:background="#FFFFFF"
             android:padding="10dp"/>
 
@@ -45,7 +45,7 @@
             android:background="@drawable/rounded_background">
 
             <TextView
-                android:id="@+id/text_job_name"
+                android:id="@+id/text_job_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
@@ -53,37 +53,73 @@
                 android:textStyle="bold"
                 android:background="@drawable/rounded_background"
                 android:padding="10dp"
-                android:text="Job Name"/>
+                android:text="Job Title"/>
 
             <TextView
-                android:id="@+id/text_job_position"
+                android:id="@+id/text_company_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:textColor="@android:color/black"
                 android:background="@drawable/rounded_background"
                 android:padding="10dp"
-                android:text="Job Position"/>
+                android:text="Company Name"/>
 
             <TextView
-                android:id="@+id/text_job_requirements"
+                android:id="@+id/text_job_salaryranage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:textColor="@android:color/black"
                 android:background="@drawable/rounded_background"
                 android:padding="10dp"
-                android:text="Job Requirements"/>
+                android:text="Salary Range"/>
 
             <TextView
-                android:id="@+id/text_job_jobsal"
+                android:id="@+id/text_job_experience"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:textColor="@android:color/black"
                 android:background="@drawable/rounded_background"
                 android:padding="10dp"
-                android:text="Job Salary"/>
+                android:text="Experience Level"/>
+            <TextView
+                android:id="@+id/text_job_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:background="@drawable/rounded_background"
+                android:padding="10dp"
+                android:text="Location"/>
+            <TextView
+                android:id="@+id/text_job_education"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:background="@drawable/rounded_background"
+                android:padding="10dp"
+                android:text="Education Level"/>
+            <TextView
+                android:id="@+id/text_job_employment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:background="@drawable/rounded_background"
+                android:padding="10dp"
+                android:text="Employment Type"/>
+            <TextView
+                android:id="@+id/text_job_requiredskills"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:background="@drawable/rounded_background"
+                android:padding="10dp"
+                android:text="Required Skills"/>
 
         </LinearLayout>
 
@@ -93,7 +129,7 @@
             android:layout_height="wrap_content"
             android:text="Upload CV (PDF)"
             android:layout_marginTop="16dp"
-            android:backgroundTint="@color/blue"
+            android:backgroundTint="@color/blue2"
             android:onClick="onUploadCVButtonClick"/>
 
         <Button
@@ -101,7 +137,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Apply"
-            android:backgroundTint="@color/blue"
+            android:backgroundTint="@color/blue2"
             android:textColor="#FFFFFF"
             android:layout_marginTop="16dp"
             android:onClick="onApplyButtonClick"/>

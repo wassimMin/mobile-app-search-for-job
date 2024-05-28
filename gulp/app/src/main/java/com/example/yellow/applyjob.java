@@ -51,22 +51,25 @@ public class applyjob extends AppCompatActivity {
     private byte[] pdfByteArray;
     private TextView error_message;
     private SharedPreferences sharedPreferences;
-    private String jobname1,jobpos1,jobreq1,jobsal1,idjob1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_applyjob);
         jobList = new ArrayList<>();
-        Intent intent = getIntent();
-        error_message = findViewById(R.id.text_error_message);
         sharedPreferences = getSharedPreferences("yellow",MODE_PRIVATE);
-        idjob1 = sharedPreferences.getString("jobId", "");
-        jobname1 = sharedPreferences.getString("jobName", "");
-        jobpos1 = sharedPreferences.getString("jobPosition", "");
-        jobreq1 = sharedPreferences.getString("jobRequirements", "");
-        jobsal1 = sharedPreferences.getString("jobSalaire", "");
         userId = sharedPreferences.getInt("userid",0);
-        displayJob(idjob1,jobname1,jobpos1,jobreq1,jobsal1);
+        error_message = findViewById(R.id.text_error_message);
+        Intent intent = getIntent();
+        String title = intent.getStringExtra("job_title");
+        String companyName = intent.getStringExtra("job_companyname");
+        String salary = intent.getStringExtra("job_salary");
+        String experience = intent.getStringExtra("job_experience");
+        String location = intent.getStringExtra("job_location");
+        String education = intent.getStringExtra("job_education");
+        String employment = intent.getStringExtra("job_employment");
+        String requiredSkills = intent.getStringExtra("job_requiredskills");
+        jobId = intent.getStringExtra("jobid");
+        displayJob(jobId,title,companyName,salary,experience,location,education,employment,requiredSkills);
         if (userId != -1) {
             Toast.makeText(this, "User ID is not Null", Toast.LENGTH_SHORT).show();
         } else {
@@ -77,7 +80,7 @@ public class applyjob extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), userhome.class);
+                Intent intent = new Intent(getApplicationContext(), Showjobs.class);
                 startActivity(intent);
                 finish();
             }
@@ -86,19 +89,32 @@ public class applyjob extends AppCompatActivity {
 
 
 
-    private void displayJob(String idjob1, String jobname1, String jobpos1,String jobreq1,String jobsal1) {
+    private void displayJob(String idjob1, String title, String companyName,String salary,String experience,String location,String education,String employment,String requiredSkills) {
         jobId = idjob1;
-        TextView jobNameTextView = findViewById(R.id.text_job_name);
-        jobNameTextView.setText(jobname1);
+        TextView jobtitletextview = findViewById(R.id.text_job_title);
+        jobtitletextview.setText(title);
 
-        TextView jobPositionTextView = findViewById(R.id.text_job_position);
-        jobPositionTextView.setText(jobpos1);
+        TextView companynameTextView = findViewById(R.id.text_company_name);
+        companynameTextView.setText(companyName);
 
-        TextView jobRequirementsTextView = findViewById(R.id.text_job_requirements);
-        jobRequirementsTextView.setText(jobreq1);
+        TextView salaryTextView = findViewById(R.id.text_job_salaryranage);
+        salaryTextView.setText(salary);
 
-        TextView jobSalaireTextView = findViewById(R.id.text_job_jobsal);
-        jobSalaireTextView.setText(jobsal1);
+        TextView experienceTextView = findViewById(R.id.text_job_experience);
+        experienceTextView.setText(experience);
+
+        TextView locationTextView = findViewById(R.id.text_job_location);
+        locationTextView.setText(location);
+
+        TextView educationTextView = findViewById(R.id.text_job_education);
+        educationTextView.setText(education);
+
+        TextView employmentTextView = findViewById(R.id.text_job_employment);
+        employmentTextView.setText(employment);
+
+        TextView requiredSkillsTextView = findViewById(R.id.text_job_requiredskills);
+        requiredSkillsTextView.setText(requiredSkills);
+
     }
 
     public void onUploadCVButtonClick(View view) {
@@ -222,7 +238,6 @@ public class applyjob extends AppCompatActivity {
 
         };
 
-        // Add the request to the RequestQueue
         queue.add(multipartRequest);
     }
 }

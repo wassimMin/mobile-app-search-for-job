@@ -43,7 +43,16 @@ public class JobUserAdapter extends RecyclerView.Adapter<JobUserAdapter.JobViewH
         holder.readMoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,Applyjob.class);
+                Intent intent = new Intent(context,applyjob.class);
+                intent.putExtra("jobid",String.valueOf(job.getId()));
+                intent.putExtra("job_title", job.getJobTitle());
+                intent.putExtra("job_companyname", job.getCompanyName());
+                intent.putExtra("job_salary", job.getSalaryRange());
+                intent.putExtra("job_experience", job.getExperienceLevel());
+                intent.putExtra("job_location", job.getLocation());
+                intent.putExtra("job_education", job.getEducationLevel());
+                intent.putExtra("job_employment", job.getEmploymentType());
+                intent.putExtra("job_requiredskills", job.getRequiredSkills());
                 context.startActivity(intent);
             }
         });
