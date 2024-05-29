@@ -1,5 +1,6 @@
 package com.example.yellow;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Base64;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ public class recieveapplication extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ApplicationAdapter applicationAdapter;
     private List<AplicationItem> applicationList;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class recieveapplication extends AppCompatActivity {
         applicationList = new ArrayList<>();
         applicationAdapter = new ApplicationAdapter(this, applicationList);
         recyclerView.setAdapter(applicationAdapter);
+        sharedPreferences = getSharedPreferences("yellow",MODE_PRIVATE);
 
         fetchApplications();
     }
@@ -63,8 +66,16 @@ public class recieveapplication extends AppCompatActivity {
                                     String userName = jsonObject.getString("user_name");
                                     String jobName = jsonObject.getString("job_name");
                                     byte[] cvPdfData = Base64.decode(jsonObject.getString("cv_pdf"), Base64.DEFAULT);
-
-                                    AplicationItem application = new AplicationItem(appid,userName, jobName, cvPdfData);
+                                    String cvPdfDataBase64 = Base64.encodeToString(cvPdfData, Base64.DEFAULT);
+                                    int userid = jsonObject.getInt("userid");
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putInt("user_id",userid);
+                                    editor.putString("cv_pdf",cvPdfDataBase64);
+                                    editor.putString("username",userName);
+                                    editor.putString("jobtitle",jobName);
+                                    editor.putString("applicationid",appid);
+                                    editor.apply();
+                                    AplicationItem application = new AplicationItem(appid,userName, jobName, cvPdfData,String.valueOf(userid));
                                     applicationList.add(application);
                                 }
                                 applicationAdapter.notifyDataSetChanged();

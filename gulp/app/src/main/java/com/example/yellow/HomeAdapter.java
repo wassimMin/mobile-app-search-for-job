@@ -44,6 +44,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                 }else if(item.getTitle().equals("Jobs")){
                     Intent intent = new Intent(context,Showjobs.class);
                     context.startActivity(intent);
+                }else if(item.getTitle().equals("Application")){
+                    Intent intent = new Intent(context,Response.class);
+                    context.startActivity(intent);
                 }
             }
         });
