@@ -29,6 +29,7 @@ public class recieveapplication extends AppCompatActivity {
     private ApplicationAdapter applicationAdapter;
     private List<AplicationItem> applicationList;
     SharedPreferences sharedPreferences;
+    int companyid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,8 @@ public class recieveapplication extends AppCompatActivity {
         applicationAdapter = new ApplicationAdapter(this, applicationList);
         recyclerView.setAdapter(applicationAdapter);
         sharedPreferences = getSharedPreferences("yellow",MODE_PRIVATE);
+        companyid = sharedPreferences.getInt("userid",-1);
+
 
         fetchApplications();
     }
@@ -70,6 +73,7 @@ public class recieveapplication extends AppCompatActivity {
                                     int userid = jsonObject.getInt("userid");
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putInt("user_id",userid);
+                                    editor.putInt("userid",companyid);
                                     editor.putString("cv_pdf",cvPdfDataBase64);
                                     editor.putString("username",userName);
                                     editor.putString("jobtitle",jobName);

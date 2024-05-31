@@ -7,8 +7,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
@@ -34,10 +46,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         holder.titleView.setText(item.getTitle());
         holder.subtitleView.setText(item.getSubtitle());
 
-        // Set click listener
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String url = "http://192.168.1.52/memoire/fetch_responses.php";
                 if (item.getTitle().equals("Profile")) {
                     Intent intent = new Intent(context, profileuser.class);
                     context.startActivity(intent);
@@ -45,7 +57,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                     Intent intent = new Intent(context,Showjobs.class);
                     context.startActivity(intent);
                 }else if(item.getTitle().equals("Application")){
-                    Intent intent = new Intent(context,Response.class);
+                    Intent intent = new Intent(context,showResponse.class);
+                    context.startActivity(intent);
+                }else if(item.getTitle().equals("Chat")){
+                    Intent intent = new Intent(context, CompanyListActivity.class);
                     context.startActivity(intent);
                 }
             }

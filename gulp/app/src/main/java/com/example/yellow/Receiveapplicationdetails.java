@@ -57,17 +57,17 @@ public class Receiveapplicationdetails extends AppCompatActivity {
         refuse = findViewById(R.id.btn_refuse);
         username.setText(nameuser);
         jobtitle.setText(titlejob);
-        message = editext.getText().toString();
-
         accepte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                message = editext.getText().toString();
                 setResponse("Accepte");
             }
         });
         refuse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                message = editext.getText().toString();
                 setResponse("Refuse");
             }
         });
@@ -128,7 +128,6 @@ public class Receiveapplicationdetails extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                // Handle the error
                 Toast.makeText(Receiveapplicationdetails.this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }) {

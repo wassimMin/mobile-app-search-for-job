@@ -103,6 +103,7 @@ public class ChatActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("sender_id", String.valueOf(id));
+                params.put("receiver_id",String.valueOf(idreceiver));
                 params.put("message_content", messageContent);
                 params.put("message_usertype", String.valueOf(usertype));
                 return params;
@@ -131,13 +132,12 @@ public class ChatActivity extends AppCompatActivity {
                                 int senderId = jsonObject.getInt("sender_id");
                                 String userType = jsonObject.getString("message_usertype");
 
-                                Message message = new Message(messageId, content, senderId ,userType);
+                                Message message = new Message(messageId, content, senderId, userType);
                                 messageList.add(message);
                             }
 
                             messageAdapter.notifyDataSetChanged();
                         } catch (JSONException e) {
-                            // JSON parsing error
                             Toast.makeText(ChatActivity.this, "Error parsing JSON", Toast.LENGTH_SHORT).show();
                             Log.e("JsonParseError", e.getMessage());
                         }
@@ -147,7 +147,15 @@ public class ChatActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(ChatActivity.this, error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
-        });
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("sender_id", String.valueOf(id));
+                params.put("receiver_id", String.valueOf(idreceiver));
+                return params;
+            }
+        };
 
         queue.add(stringRequest);
     }

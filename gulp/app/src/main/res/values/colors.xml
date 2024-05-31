@@ -42,4 +42,7 @@
     <color name="cardBackgroundColor">#FFFFFF</color>
     <color name="gray">#808080</color>
     <color name="blue2">#03045e</color>
+    <color name="accept_button_color">#4CAF50</color>
+    <color name="refuse_button_color">#F44336</color>
+    <color name="primary_button_color">#2196F3</color>
 </resources>

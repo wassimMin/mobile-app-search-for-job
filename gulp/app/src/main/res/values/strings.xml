@@ -107,4 +107,8 @@
     </string-array>
     <string name="title_activity_showjobs">Showjobs</string>
     <string name="title_activity_applyjob">Applyjob</string>
+    <string-array name="languages">
+        <item>English</item>
+        <item>French</item>
+    </string-array>
 </resources>

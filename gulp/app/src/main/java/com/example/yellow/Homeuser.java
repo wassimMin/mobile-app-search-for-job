@@ -30,6 +30,7 @@ public class Homeuser extends AppCompatActivity {
                 } else if (itemId == R.id.nav_profile) {
                     selectedFragment = new ProfileFragment();
                 } else if (itemId == R.id.nav_settings) {
+                    selectedFragment = new SettingFragment();
                 }
 
                 if (selectedFragment != null) {
