@@ -60,7 +60,7 @@ public class CompanyListActivity extends AppCompatActivity {
                         JSONObject jsonObject = response.getJSONObject(i);
 
                         String status = jsonObject.getString("status");
-                        if ("accepted".equals(status)) {
+                        if ("Accepte".equals(status)) {
                             int companyid = jsonObject.getInt("companyid");
                             int userid = jsonObject.getInt("userid");
                             String jobTitle = jsonObject.getString("job_name");

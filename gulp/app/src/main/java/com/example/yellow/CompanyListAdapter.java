@@ -33,7 +33,7 @@ public class CompanyListAdapter extends RecyclerView.Adapter<CompanyListAdapter.
     @Override
     public void onBindViewHolder(@NonNull CompanyViewHolder holder, int position) {
         JobResponse jobResponse = jobResponseList.get(position);
-        holder.jobTitle.setText(jobResponse.getJobTitle());
+        holder.jobTitle.setText((jobResponse.getJobTitle()));
         holder.message.setText(jobResponse.getMessage());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -44,7 +44,7 @@ public class CompanyListAdapter extends RecyclerView.Adapter<CompanyListAdapter.
                 editor.putInt("userid",jobResponse.getUserid());
                 editor.apply();
                 Intent intent = new Intent(context, ChatActivity.class);
-                intent.putExtra("companyid", jobResponse.getCompanyid());
+                intent.putExtra("userid", jobResponse.getCompanyid());
                 context.startActivity(intent);
             }
         });

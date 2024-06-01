@@ -47,8 +47,8 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 textviewerror.setVisibility(View.GONE);
-                String email = String.valueOf(textinputedittextemail.getText());
-                String password = String.valueOf(textinputedittextpassword.getText());
+                String email = String.valueOf(textinputedittextemail.getText()).trim();
+                String password = String.valueOf(textinputedittextpassword.getText()).trim();
 
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
                 String url = "http://192.168.1.52/memoire/login.php";
