@@ -75,6 +75,10 @@ public class Login extends AppCompatActivity {
                                         editor.putString("password",jsonObject.getString("password"));
                                         editor.apply();
 
+                                        Intent serviceIntent = new Intent(Login.this, NotificationService.class);
+                                        serviceIntent.putExtra("user_id", userid);
+                                        startService(serviceIntent);
+
                                         if (userType == 1) {
                                             Intent intent = new Intent(Login.this, Dashboard.class);
                                             intent.putExtra("usertype", "Company");
@@ -120,7 +124,6 @@ public class Login extends AppCompatActivity {
                         return params;
                     }
                 };
-                // Add the string request to the RequestQueue
                 queue.add(stringRequest);
             }
         });
