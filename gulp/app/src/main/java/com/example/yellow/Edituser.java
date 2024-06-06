@@ -31,6 +31,7 @@ public class Edituser extends AppCompatActivity {
     int userid,usertype;
     String username,useremail,userpassword;
     SharedPreferences sharedPreferences;
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,12 +44,11 @@ public class Edituser extends AppCompatActivity {
         textinputname = findViewById(R.id.user_name);
         textinputemail = findViewById(R.id.user_email);
         textinputpassword = findViewById(R.id.user_password);
-        sharedPreferences = getSharedPreferences("yellow", MODE_PRIVATE);
-        userid = sharedPreferences.getInt("userid",0);
-        username = sharedPreferences.getString("name", "");
-        useremail = sharedPreferences.getString("email", "");
-        userpassword = sharedPreferences.getString("password","");
-        usertype = sharedPreferences.getInt("usertype",0);
+        intent = getIntent();
+        userid = intent.getIntExtra("userid",0);
+        username = intent.getStringExtra("name");
+        useremail = intent.getStringExtra("email");
+        userpassword = intent.getStringExtra("password");
         textinputname.setText(username);
         textinputemail.setText(useremail);
         textinputpassword.setText(userpassword);
@@ -58,25 +58,14 @@ public class Edituser extends AppCompatActivity {
                 edituser();
             }
         });
-        if(usertype == 0){
-            backButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getApplicationContext(), profileuser.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-        }else{
-            backButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getApplicationContext(), profile.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-        }
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), profile.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
     private void edituser() {
         String userNameo = textinputname.getText().toString().trim();

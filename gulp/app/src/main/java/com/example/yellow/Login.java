@@ -66,6 +66,7 @@ public class Login extends AppCompatActivity {
                                         int userType = jsonObject.getInt("usertype");
                                         String name = jsonObject.getString("name");
                                         String email = jsonObject.getString("email");
+                                        String password = jsonObject.getString("password");
                                         SharedPreferences.Editor editor = sharedPreferences.edit();
                                         editor.putInt("userid", jsonObject.getInt("userid"));
                                         editor.putString("token", jsonObject.getString("token"));
@@ -85,6 +86,7 @@ public class Login extends AppCompatActivity {
                                             intent.putExtra("name", name);
                                             intent.putExtra("email", email);
                                             intent.putExtra("userid",userid);
+                                            intent.putExtra("password",password);
                                             startActivity(intent);
                                         }else if(userType == 0){
                                             Intent intent = new Intent(Login.this, Homeuser.class);

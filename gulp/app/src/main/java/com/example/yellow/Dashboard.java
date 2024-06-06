@@ -20,6 +20,9 @@ public class Dashboard extends AppCompatActivity {
 
         intent = getIntent();
         int userid = intent.getIntExtra("userid",0);
+        String name = intent.getStringExtra("name");
+        String email = intent.getStringExtra("email");
+        String password = intent.getStringExtra("password");
         CardView btnProfile = findViewById(R.id.card_profile);
         CardView btnAddJob = findViewById(R.id.card_add_job);
         CardView btnStatus = findViewById(R.id.card_status);
@@ -31,6 +34,10 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Dashboard.this, profile.class);
+                intent.putExtra("userid",userid);
+                intent.putExtra("name",name);
+                intent.putExtra("email",email);
+                intent.putExtra("password",password);
                 startActivity(intent);
             }
         });
