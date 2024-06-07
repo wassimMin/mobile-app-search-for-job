@@ -2,6 +2,7 @@ package com.example.yellow;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     private List<HomeItem> itemList;
     private Context context;
 
+
     public HomeAdapter(List<HomeItem> itemList, Context context) {
         this.itemList = itemList;
         this.context = context;
@@ -49,18 +51,24 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "http://192.168.1.52/memoire/fetch_responses.php";
+                Intent intent = null;
                 if (item.getTitle().equals("Profile")) {
-                    Intent intent = new Intent(context, profileuser.class);
+                     intent = new Intent(context, profileuser.class);
                     context.startActivity(intent);
                 }else if(item.getTitle().equals("Jobs")){
-                    Intent intent = new Intent(context,Showjobs.class);
+                     intent = new Intent(context,Showjobs.class);
                     context.startActivity(intent);
                 }else if(item.getTitle().equals("Application")){
-                    Intent intent = new Intent(context,showResponse.class);
+                     intent = new Intent(context,showResponse.class);
                     context.startActivity(intent);
                 }else if(item.getTitle().equals("Chat")){
-                    Intent intent = new Intent(context, CompanyListActivity.class);
+                     intent = new Intent(context, CompanyListActivity.class);
+                    context.startActivity(intent);
+                }
+                if (intent != null) {
+                    SharedPreferences sharedPreferences = context.getSharedPreferences("yellow", Context.MODE_PRIVATE);
+                    int userid = sharedPreferences.getInt("userid", -1);
+                    intent.putExtra("userid", userid);
                     context.startActivity(intent);
                 }
             }

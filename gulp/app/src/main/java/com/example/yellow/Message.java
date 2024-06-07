@@ -3,14 +3,16 @@ package com.example.yellow;
 public class Message {
     private int messageId;
     private int senderId;
+    private int recieverId;
     private String messageContent;
     private String userType;
 
-    public Message(int messageId, String messageContent, int senderId, String userType) {
+    public Message(int messageId, String messageContent, int senderId,int recieverId, String userType) {
         this.messageId = messageId;
         this.messageContent = messageContent;
         this.senderId = senderId;
         this.userType = userType;
+        this.recieverId = recieverId;
     }
 
 

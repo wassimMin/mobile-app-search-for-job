@@ -1,5 +1,6 @@
 package com.example.yellow;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,11 +24,16 @@ public class showResponse extends AppCompatActivity {
     private JobResponseAdapter jobResponseAdapter;
     private List<JobResponse> jobResponseList;
     private RequestQueue requestQueue;
+    private int userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_response);
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("userid")) {
+            userid = intent.getIntExtra("userid", -1);
+        }
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -42,23 +48,27 @@ public class showResponse extends AppCompatActivity {
     }
 
     private void fetchJobResponses() {
-        String url = "http://192.168.1.52/memoire/fetch_responses.php";
+        String url = "http://192.168.1.52/memoire/fetch_responses.php?userid=" + userid;
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
-                    for (int i = 0; i < response.length(); i++) {
-                        JSONObject jsonObject = response.getJSONObject(i);
+                    jobResponseList.clear();
+                    if (response.length() == 0) {
+                        Toast.makeText(showResponse.this, "No job responses found", Toast.LENGTH_SHORT).show();
+                    } else {
+                        for (int i = 0; i < response.length(); i++) {
+                            JSONObject jsonObject = response.getJSONObject(i);
 
-                        String jobTitle = jsonObject.getString("job_name");
-                        String message = jsonObject.getString("message");
-                        String status = jsonObject.getString("status");
+                            String jobTitle = jsonObject.getString("job_name");
+                            String message = jsonObject.getString("message");
+                            String status = jsonObject.getString("status");
 
-                        JobResponse jobResponse = new JobResponse(jobTitle, message, status);
-                        jobResponseList.add(jobResponse);
+                            JobResponse jobResponse = new JobResponse(jobTitle, message, status);
+                            jobResponseList.add(jobResponse);
+                        }
                     }
-
                     jobResponseAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();

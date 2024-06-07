@@ -9,11 +9,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import android.view.MenuItem;
 
 public class Homeuser extends AppCompatActivity {
-
+    private int userid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homeuser);
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("userid")) {
+            userid = intent.getIntExtra("userid", -1);
+        }
+
         if (savedInstanceState == null) {
             loadFragment(new HomeFragment());
         }

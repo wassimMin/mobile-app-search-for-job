@@ -56,6 +56,7 @@ public class ChatActivity extends AppCompatActivity {
         usertype = sharedPreferences.getInt("usertype", 0);
         intent = getIntent();
         idreceiver = intent.getIntExtra("userid",0);
+
         buttonSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,7 +133,7 @@ public class ChatActivity extends AppCompatActivity {
                                 int senderId = jsonObject.getInt("sender_id");
                                 String userType = jsonObject.getString("message_usertype");
 
-                                Message message = new Message(messageId, content, senderId, userType);
+                                Message message = new Message(messageId, content, senderId,idreceiver,userType);
                                 messageList.add(message);
                             }
 
