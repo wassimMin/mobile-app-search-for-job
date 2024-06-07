@@ -109,7 +109,9 @@
 
         <activity
             android:name=".recieveapplication"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop"
+        />
 
         <service
             android:name=".NotificationService"

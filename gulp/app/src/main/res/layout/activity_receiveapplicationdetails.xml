@@ -43,27 +43,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="16dp" />
 
-    <EditText
-        android:id="@+id/response_message"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Write your message here"
-        android:padding="12dp"
-        android:textSize="16sp"
-        android:textColor="@android:color/black"
-        android:background="@drawable/edittext_background"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/application_date"
-        android:layout_marginBottom="16dp" />
-
     <LinearLayout
         android:id="@+id/button_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/response_message"
+        app:layout_constraintTop_toBottomOf="@id/application_date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="16dp"

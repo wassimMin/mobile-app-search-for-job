@@ -1,17 +1,16 @@
 package com.example.yellow;
+
 import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
@@ -28,14 +27,12 @@ import org.json.JSONException;
 public class NotificationService extends Service {
     private static final String TAG = "NotificationService";
     private static final String CHANNEL_ID = "job_application_channel";
-    private static final int NOTIFICATION_ID = 1;
-    private static final String NOTIFICATION_URL = "http://192.168.1.52/memoire/notifications.php";
-    int notificationId;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         int userId = intent.getIntExtra("user_id", -1);
         if (userId != -1) {
+            Log.d(TAG, "Received user ID: " + userId);
             checkNotifications(userId);
         } else {
             Log.e(TAG, "Invalid user ID received");
@@ -46,7 +43,8 @@ public class NotificationService extends Service {
     private void checkNotifications(int userId) {
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        String url = NOTIFICATION_URL + "?user_id=" + userId;
+        String url = "http://192.168.1.52/memoire/notifications.php?user_id=" + userId;
+        Log.d(TAG, "Notification URL: " + url);
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
@@ -54,15 +52,16 @@ public class NotificationService extends Service {
                     public void onResponse(JSONArray response) {
                         try {
                             if (response.length() > 0) {
-                                notificationId = response.getJSONObject(0).getInt("id");
+                                int notificationId = response.getJSONObject(0).getInt("id");
                                 String notificationMessage = response.getJSONObject(0).getString("message");
-                                showNotification(notificationMessage);
+                                Log.d(TAG, "Notification ID: " + notificationId);
+                                Log.d(TAG, "Notification Message: " + notificationMessage);
+                                showNotification(notificationId, notificationMessage);
                             } else {
                                 Log.w(TAG, "Empty response received");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            // Handle JSON parsing error
                             Log.e(TAG, "Error parsing JSON response: " + e.getMessage());
                         }
                     }
@@ -71,7 +70,6 @@ public class NotificationService extends Service {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
-                        // Handle network error
                         Log.e(TAG, "Volley error: " + error.getMessage());
                     }
                 }
@@ -81,13 +79,13 @@ public class NotificationService extends Service {
     }
 
     @SuppressLint("MissingPermission")
-    private void showNotification(String message) {
+    private void showNotification(int notificationId, String message) {
         createNotificationChannel();
 
         Intent intent = new Intent(this, recieveapplication.class);
         intent.setAction("DELETE_NOTIFICATION");
         intent.putExtra("NOTIFICATION_ID", notificationId);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
@@ -99,7 +97,7 @@ public class NotificationService extends Service {
                 .setAutoCancel(true);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        notificationManager.notify(NOTIFICATION_ID, builder.build());
+        notificationManager.notify(notificationId, builder.build());
     }
 
     private void createNotificationChannel() {

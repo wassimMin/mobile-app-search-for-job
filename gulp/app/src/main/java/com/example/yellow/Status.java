@@ -30,12 +30,14 @@ public class Status extends AppCompatActivity {
     private List<Job> jobList;
     private JobAdapter jobAdapter;
     Intent intent;
+    int userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_status);
-
+        intent = getIntent();
+        userid = intent.getIntExtra("userid",-1);
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         jobList = new ArrayList<>();
@@ -54,8 +56,7 @@ public class Status extends AppCompatActivity {
     }
 
     private void fetchJobs() {
-        String url = "http://192.168.1.52/memoire/getsjob.php";
-
+        String url = "http://192.168.1.52/memoire/getsjob.php?userid=" + userid;
         RequestQueue queue = Volley.newRequestQueue(this);
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
@@ -65,8 +66,8 @@ public class Status extends AppCompatActivity {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        if (response != null && response.length() > 0) {
-                            try {
+                        try {
+                            if (response != null && response.length() > 0) {
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject jobObject = response.getJSONObject(i);
                                     String jobId = jobObject.getString("id");
@@ -79,16 +80,16 @@ public class Status extends AppCompatActivity {
                                     String experienceLevel = jobObject.getString("experience_level");
                                     String educationlevel = jobObject.getString("education_level");
 
-                                    Job job = new Job(Integer.valueOf(jobId), jobName, companyName, employmenttype, location, requiredskills, experienceLevel, educationlevel, jobSalaire, "", 0);
+                                    Job job = new Job(Integer.valueOf(jobId), jobName, companyName, employmenttype, location, requiredskills, experienceLevel, educationlevel, jobSalaire, "", userid);
                                     jobList.add(job);
                                 }
                                 jobAdapter.notifyDataSetChanged();
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                                Toast.makeText(Status.this, "Error parsing JSON response", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(Status.this, "No jobs found", Toast.LENGTH_SHORT).show();
                             }
-                        } else {
-                            Toast.makeText(Status.this, "No jobs found", Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(Status.this, "Error parsing JSON response: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },

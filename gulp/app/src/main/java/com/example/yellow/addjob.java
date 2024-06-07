@@ -40,6 +40,7 @@ public class addjob extends AppCompatActivity {
         setContentView(R.layout.activity_addjob);
         intent = getIntent();
         int userId = intent.getIntExtra("userid",0);
+        System.out.println("User ID : " + userId);
         textInputEditTextJobTitle = findViewById(R.id.jobtitle);
         textInputEditTextCompanyName = findViewById(R.id.companyname);
         textInputEditTextLocation = findViewById(R.id.locationtext);
@@ -67,7 +68,7 @@ public class addjob extends AppCompatActivity {
 
                 employmentType = employmentTypeSpinner.getSelectedItem().toString();
                 experienceLevel = experienceLevelSpinner.getSelectedItem().toString();
-
+                System.out.println("GAS INFO:"+ jobTitle+" "+companyName+" "+location+" "+salaryRange+" "+requiredSkills+" "+employmentType+" "+experienceLevel);
                 if (educationTypeSpinner.getSelectedItem() != null) {
                     educationLevel = educationTypeSpinner.getSelectedItem().toString();
                 } else {

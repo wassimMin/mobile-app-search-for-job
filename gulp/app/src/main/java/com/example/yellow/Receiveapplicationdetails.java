@@ -48,7 +48,6 @@ public class Receiveapplicationdetails extends AppCompatActivity {
         companyId = sharedPreferences.getInt("userid",-1);
         userId = sharedPreferences.getInt("user_id",-1);
         applicationId = sharedPreferences.getString("applicationid",null);
-        editext = findViewById(R.id.response_message);
 
         profile = findViewById(R.id.btn_view_profile);
         opencv = findViewById(R.id.btn_view_cv);
@@ -60,14 +59,15 @@ public class Receiveapplicationdetails extends AppCompatActivity {
         accepte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                message = editext.getText().toString();
+                message = "You Have Been Accepted To The Job";
                 setResponse("Accepte");
             }
         });
         refuse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                message = editext.getText().toString();
+
+                message = "Sorry, We Cannt Accepte For The Job";
                 setResponse("Refuse");
             }
         });
