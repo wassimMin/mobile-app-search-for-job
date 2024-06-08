@@ -50,7 +50,6 @@ public class recieveapplication extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("yellow", MODE_PRIVATE);
         companyid = sharedPreferences.getInt("userid", -1);
 
-        // Log the initial intent
         if (getIntent() != null && getIntent().getAction() != null) {
             Log.d(TAG, "Initial Intent Action: " + getIntent().getAction());
             if ("DELETE_NOTIFICATION".equals(getIntent().getAction())) {

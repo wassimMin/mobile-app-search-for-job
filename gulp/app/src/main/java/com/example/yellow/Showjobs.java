@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
@@ -31,17 +30,19 @@ public class Showjobs extends AppCompatActivity {
     private RecyclerView recyclerView;
     private JobUserAdapter jobUserAdapter;
     private List<Job> jobList;
-    ImageButton btnback;
+    private ImageButton btnback;
     private RequestQueue requestQueue;
 
     private int userId;
     private static final String TAG = "ShowJobs";
-    private static final String REMOVE_NOTIFICATION_URL = "http://192.168.1.52/memoire/remove_notificationaddjob.php";
+    private static final String REMOVE_NOTIFICATION_URL_BASE = "http://192.168.1.52/memoire/remove_notificationaddjob.php?id=";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_showjobs2);
+
+        initializeRequestQueue();
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -54,30 +55,38 @@ public class Showjobs extends AppCompatActivity {
         userId = sharedPreferences.getInt("userid", 0);
 
         Intent intent2 = getIntent();
-        if (intent2 != null && intent2.hasExtra("notification_id") && userId == -1) {
+        if (intent2 != null && intent2.hasExtra("notification_id")) {
             int notificationId = intent2.getIntExtra("notification_id", -1);
-            userId = intent2.getIntExtra("userid",-1);
-            removeNotificationFromServer(notificationId);
-
+            userId = intent2.getIntExtra("userid", -1);
+            Log.d(TAG, "Notification ID: " + notificationId);
+            Log.d(TAG, "User ID: " + userId);
+            if (notificationId != -1 && userId != -1) {
+                removeNotificationFromServer(notificationId);
+            }
         }
+
         btnback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Showjobs.this,Homeuser.class);
+                Intent intent = new Intent(Showjobs.this, Homeuser.class);
                 startActivity(intent);
             }
         });
+
         fetchJobs();
     }
+
     private void initializeRequestQueue() {
         requestQueue = Volley.newRequestQueue(this);
     }
 
     private void removeNotificationFromServer(final int notificationId) {
+        String url = REMOVE_NOTIFICATION_URL_BASE + notificationId;
+        Log.d(TAG, "Remove Notification URL: " + url);
 
         StringRequest stringRequest = new StringRequest(
-                Request.Method.POST,
-                REMOVE_NOTIFICATION_URL,
+                Request.Method.GET,
+                url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -88,19 +97,12 @@ public class Showjobs extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e(TAG, "Error: " + error.getMessage());
+                        Toast.makeText(Showjobs.this, "Error removing notification", Toast.LENGTH_SHORT).show();
                     }
-                }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("id", String.valueOf(notificationId));
-                return params;
-            }
-        };
+                });
 
         requestQueue.add(stringRequest);
     }
-
 
     private void fetchJobs() {
         RequestQueue queue = Volley.newRequestQueue(this);

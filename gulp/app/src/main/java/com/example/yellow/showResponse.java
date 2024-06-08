@@ -11,6 +11,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,7 +26,8 @@ public class showResponse extends AppCompatActivity {
     private List<JobResponse> jobResponseList;
     private RequestQueue requestQueue;
     private int userid;
-
+    int notificationId;
+    Intent intent1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +36,6 @@ public class showResponse extends AppCompatActivity {
         if (intent != null && intent.hasExtra("userid")) {
             userid = intent.getIntExtra("userid", -1);
         }
-
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -85,4 +86,5 @@ public class showResponse extends AppCompatActivity {
 
         requestQueue.add(jsonArrayRequest);
     }
+
 }

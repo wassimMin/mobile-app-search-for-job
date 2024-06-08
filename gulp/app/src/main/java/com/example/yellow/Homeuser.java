@@ -1,5 +1,4 @@
 package com.example.yellow;
-
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -8,7 +7,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import android.view.MenuItem;
 
-public class Homeuser extends AppCompatActivity {
+public class Homeuser extends AppCompatActivity implements HomeFragment.OnNavigationListener {
     private int userid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,5 +50,11 @@ public class Homeuser extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .commit();
+    }
+
+    // Implement the interface method
+    @Override
+    public void onNavigateToProfile() {
+        loadFragment(new ProfileFragment());
     }
 }
