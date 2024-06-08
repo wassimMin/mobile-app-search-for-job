@@ -8,19 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -29,11 +19,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     private List<HomeItem> itemList;
     private Context context;
 
-
     public HomeAdapter(List<HomeItem> itemList, Context context) {
         this.itemList = itemList;
         this.context = context;
     }
+
     @NonNull
     @Override
     public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,26 +34,28 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
         final HomeItem item = itemList.get(position);
-        holder.imageView.setImageResource(item.getImageResource());
         holder.titleView.setText(item.getTitle());
         holder.subtitleView.setText(item.getSubtitle());
+
+        if (item.getTitle().equals("Profile")) {
+            holder.imageView.setImageResource(R.drawable.profile);
+            holder.imageView.setBackgroundResource(R.drawable.circle_background);
+        } else {
+            holder.imageView.setImageResource(item.getImageResource());
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = null;
                 if (item.getTitle().equals("Profile")) {
-                     intent = new Intent(context, profileuser.class);
-                    context.startActivity(intent);
-                }else if(item.getTitle().equals("Jobs")){
-                     intent = new Intent(context,Showjobs.class);
-                    context.startActivity(intent);
-                }else if(item.getTitle().equals("Application")){
-                     intent = new Intent(context,showResponse.class);
-                    context.startActivity(intent);
-                }else if(item.getTitle().equals("Chat")){
-                     intent = new Intent(context, CompanyListActivity.class);
-                    context.startActivity(intent);
+                    intent = new Intent(context, profileuser.class);
+                } else if (item.getTitle().equals("Jobs")) {
+                    intent = new Intent(context, Showjobs.class);
+                } else if (item.getTitle().equals("Application")) {
+                    intent = new Intent(context, showResponse.class);
+                } else if (item.getTitle().equals("Chat")) {
+                    intent = new Intent(context, CompanyListActivity.class);
                 }
                 if (intent != null) {
                     SharedPreferences sharedPreferences = context.getSharedPreferences("yellow", Context.MODE_PRIVATE);
@@ -74,7 +66,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             }
         });
     }
-
 
     @Override
     public int getItemCount() {

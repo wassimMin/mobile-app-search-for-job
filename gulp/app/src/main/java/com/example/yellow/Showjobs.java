@@ -3,6 +3,7 @@ package com.example.yellow;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -31,7 +32,11 @@ public class Showjobs extends AppCompatActivity {
     private JobUserAdapter jobUserAdapter;
     private List<Job> jobList;
     ImageButton btnback;
+    private RequestQueue requestQueue;
+
     private int userId;
+    private static final String TAG = "ShowJobs";
+    private static final String REMOVE_NOTIFICATION_URL = "http://192.168.1.52/memoire/remove_notificationaddjob.php";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,6 +52,14 @@ public class Showjobs extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("yellow", MODE_PRIVATE);
         userId = sharedPreferences.getInt("userid", 0);
+
+        Intent intent2 = getIntent();
+        if (intent2 != null && intent2.hasExtra("notification_id") && userId == -1) {
+            int notificationId = intent2.getIntExtra("notification_id", -1);
+            userId = intent2.getIntExtra("userid",-1);
+            removeNotificationFromServer(notificationId);
+
+        }
         btnback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,6 +69,38 @@ public class Showjobs extends AppCompatActivity {
         });
         fetchJobs();
     }
+    private void initializeRequestQueue() {
+        requestQueue = Volley.newRequestQueue(this);
+    }
+
+    private void removeNotificationFromServer(final int notificationId) {
+
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST,
+                REMOVE_NOTIFICATION_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d(TAG, "Response: " + response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e(TAG, "Error: " + error.getMessage());
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("id", String.valueOf(notificationId));
+                return params;
+            }
+        };
+
+        requestQueue.add(stringRequest);
+    }
+
 
     private void fetchJobs() {
         RequestQueue queue = Volley.newRequestQueue(this);

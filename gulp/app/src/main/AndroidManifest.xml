@@ -21,6 +21,8 @@
         android:theme="@style/Theme.Yellow"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <service android:name=".NotificationAddJobService" />
         <activity
             android:name=".CompanyListActivity"
             android:exported="false" />
@@ -116,7 +118,6 @@
         <service
             android:name=".NotificationService"
             android:exported="false" />
-
         <activity
             android:name=".Edituser"
             android:exported="false" />

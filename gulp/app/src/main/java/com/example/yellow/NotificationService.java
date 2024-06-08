@@ -27,6 +27,8 @@ import org.json.JSONException;
 public class NotificationService extends Service {
     private static final String TAG = "NotificationService";
     private static final String CHANNEL_ID = "job_application_channel";
+    private static final String CHANNEL_NAME = "Job Notifications";
+
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -54,8 +56,6 @@ public class NotificationService extends Service {
                             if (response.length() > 0) {
                                 int notificationId = response.getJSONObject(0).getInt("id");
                                 String notificationMessage = response.getJSONObject(0).getString("message");
-                                Log.d(TAG, "Notification ID: " + notificationId);
-                                Log.d(TAG, "Notification Message: " + notificationMessage);
                                 showNotification(notificationId, notificationMessage);
                             } else {
                                 Log.w(TAG, "Empty response received");
@@ -102,14 +102,10 @@ public class NotificationService extends Service {
 
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "Job Application Channel";
-            String description = "Channel for job application notifications";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
-            channel.setDescription(description);
-
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
+            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
             notificationManager.createNotificationChannel(channel);
+            Log.d(TAG, "Notification channel created with ID: " + CHANNEL_ID);
         }
     }
 

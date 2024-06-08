@@ -5,29 +5,50 @@
     android:padding="16dp"
     android:background="@color/light_gray">
 
+    <!-- Profile Image View -->
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/profile"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/circle_background"
+        android:backgroundTint="@color/light_gray"
+        android:elevation="4dp"/>
+
+    <!-- Hi Welcome Text -->
     <TextView
         android:id="@+id/home_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/profile_image"
+        android:layout_alignTop="@id/profile_image"
         android:text="Hi Welcome"
         android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginStart="16dp"/>
 
+    <!-- Home Subtitle Text -->
     <TextView
         android:id="@+id/home_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/home_welcome"
+        android:layout_toEndOf="@id/profile_image"
         android:text="Home"
         android:textColor="@color/black"
         android:textSize="14sp"
-        android:layout_below="@id/home_welcome"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="16dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/home_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/home_subtitle"/>
+        android:layout_below="@id/home_subtitle"
+        android:layout_marginTop="16dp"/>
+
 </RelativeLayout>

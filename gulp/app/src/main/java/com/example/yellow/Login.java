@@ -76,9 +76,7 @@ public class Login extends AppCompatActivity {
                                         editor.putString("password",jsonObject.getString("password"));
                                         editor.apply();
 
-                                        Intent serviceIntent = new Intent(Login.this, NotificationService.class);
-                                        serviceIntent.putExtra("user_id", userid);
-                                        startService(serviceIntent);
+
 
                                         if (userType == 1) {
                                             Intent intent = new Intent(Login.this, Dashboard.class);
@@ -88,6 +86,9 @@ public class Login extends AppCompatActivity {
                                             intent.putExtra("userid",userid);
                                             intent.putExtra("password",password);
                                             startActivity(intent);
+                                            Intent serviceIntent = new Intent(Login.this, NotificationService.class);
+                                            serviceIntent.putExtra("user_id", userid);
+                                            startService(serviceIntent);
                                         }else if(userType == 0){
                                             Intent intent = new Intent(Login.this, Homeuser.class);
                                             startActivity(intent);
@@ -95,6 +96,9 @@ public class Login extends AppCompatActivity {
                                             intent.putExtra("email", email);
                                             intent.putExtra("userid",userid);
                                             finish();
+                                            Intent serviceIntent = new Intent(Login.this, NotificationAddJobService.class);
+                                            serviceIntent.putExtra("userid", userid);
+                                            startService(serviceIntent);
                                         }
                                         else {
                                             Intent intent = new Intent(Login.this, MainActivity.class);

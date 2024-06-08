@@ -64,7 +64,6 @@ public class application extends AppCompatActivity {
                                     String responseText = responseObject.getString("response");
                                     String message = responseObject.getString("message");
 
-                                    // Create CustomResponse object and add it to the list
                                     CustomResponse response = new CustomResponse(applicationId, responseText, message);
                                     fetchedResponses.add(response);
                                 }
