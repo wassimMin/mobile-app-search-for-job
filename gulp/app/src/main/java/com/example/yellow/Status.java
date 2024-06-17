@@ -1,6 +1,7 @@
 package com.example.yellow;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -31,13 +32,18 @@ public class Status extends AppCompatActivity {
     private JobAdapter jobAdapter;
     Intent intent;
     int userid;
+    SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_status);
         intent = getIntent();
-        userid = intent.getIntExtra("userid",-1);
+        sharedPreferences = getSharedPreferences("yellow", MODE_PRIVATE);
+
+        userid = sharedPreferences.getInt("userid",0);
+        System.out.println("userid : "+ userid);
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         jobList = new ArrayList<>();

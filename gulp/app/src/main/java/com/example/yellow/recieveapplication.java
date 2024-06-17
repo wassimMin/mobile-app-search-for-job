@@ -49,6 +49,7 @@ public class recieveapplication extends AppCompatActivity {
         recyclerView.setAdapter(applicationAdapter);
         sharedPreferences = getSharedPreferences("yellow", MODE_PRIVATE);
         companyid = sharedPreferences.getInt("userid", -1);
+        System.out.println("userid: "+companyid);
 
         if (getIntent() != null && getIntent().getAction() != null) {
             Log.d(TAG, "Initial Intent Action: " + getIntent().getAction());
@@ -154,7 +155,7 @@ public class recieveapplication extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Log the error message for debugging
-                        Log.e("Volley Error", "Error fetching applications: " + error.getMessage());
+                        Log.e("Volley Error", ":P" + error.getMessage());
                         Toast.makeText(recieveapplication.this, "Error fetching applications", Toast.LENGTH_SHORT).show();
                     }
                 });

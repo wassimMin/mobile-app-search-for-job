@@ -199,7 +199,7 @@ const handleAddUserClick = ()=>{
   const handleSectionClick = (section) => {
     setSelectedSection(section);
   };
-
+// table render
   const renderTable = () => {
     switch (selectedSection) {
       case 'userManagement':

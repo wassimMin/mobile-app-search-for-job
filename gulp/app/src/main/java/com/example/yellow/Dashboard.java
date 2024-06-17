@@ -2,7 +2,9 @@ package com.example.yellow;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -11,15 +13,17 @@ import androidx.cardview.widget.CardView;
 public class Dashboard extends AppCompatActivity {
     TextView textUserName;
     Intent intent;
+    int userid;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-
+        sharedPreferences = getSharedPreferences("yellow", MODE_PRIVATE);
         intent = getIntent();
-        int userid = intent.getIntExtra("userid",0);
+        userid = sharedPreferences.getInt("userid",0);
         String name = intent.getStringExtra("name");
         String email = intent.getStringExtra("email");
         String password = intent.getStringExtra("password");
@@ -29,6 +33,7 @@ public class Dashboard extends AppCompatActivity {
         CardView btnApplication = findViewById(R.id.card_application);
         CardView btnChat = findViewById(R.id.card_chat);
         CardView btnLogout = findViewById(R.id.card_logout);
+        System.out.println("userid in dashbaord: "+userid);
 
         btnProfile.setOnClickListener(new View.OnClickListener() {
             @Override

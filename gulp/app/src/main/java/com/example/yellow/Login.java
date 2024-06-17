@@ -85,6 +85,7 @@ public class Login extends AppCompatActivity {
                                             intent.putExtra("email", email);
                                             intent.putExtra("userid",userid);
                                             intent.putExtra("password",password);
+                                            editor.putInt("userid", jsonObject.getInt("userid"));
                                             startActivity(intent);
                                             Intent serviceIntent = new Intent(Login.this, NotificationService.class);
                                             serviceIntent.putExtra("user_id", userid);
@@ -95,6 +96,7 @@ public class Login extends AppCompatActivity {
                                             intent.putExtra("name", name);
                                             intent.putExtra("email", email);
                                             intent.putExtra("userid",userid);
+                                            editor.putInt("userid", jsonObject.getInt("userid"));
                                             finish();
                                             Intent serviceIntent = new Intent(Login.this, NotificationAddJobService.class);
                                             serviceIntent.putExtra("userid", userid);

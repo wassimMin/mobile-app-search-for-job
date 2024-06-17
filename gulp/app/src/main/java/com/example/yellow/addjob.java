@@ -33,13 +33,18 @@ public class addjob extends AppCompatActivity {
     String jobTitle, companyName, employmentType, location, requiredSkills, experienceLevel, educationLevel, salaryRange;
     TextView textViewError;
     Intent intent;
+    SharedPreferences sharedPreferences;
+    int userId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addjob);
         intent = getIntent();
-        int userId = intent.getIntExtra("userid",0);
+        sharedPreferences = getSharedPreferences("yellow", MODE_PRIVATE);
+
+        userId = sharedPreferences.getInt("userid",0);
         System.out.println("User ID : " + userId);
         textInputEditTextJobTitle = findViewById(R.id.jobtitle);
         textInputEditTextCompanyName = findViewById(R.id.companyname);
