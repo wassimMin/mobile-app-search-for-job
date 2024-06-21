@@ -101,7 +101,8 @@ public class addjob extends AppCompatActivity {
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                if (response.equals("success")) {
+
+                                if (response.trim().equals("Job added successfully")) {
                                     Toast.makeText(getApplicationContext(), "Adding job successful", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(), Dashboard.class);
                                     startActivity(intent);

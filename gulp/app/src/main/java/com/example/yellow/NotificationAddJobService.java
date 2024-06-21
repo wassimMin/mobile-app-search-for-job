@@ -18,6 +18,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -72,16 +73,7 @@ public class NotificationAddJobService extends Service {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        try {
-                            for (int i = 0; i < response.length(); i++) {
-                                JSONObject jsonObject = response.getJSONObject(i);
-                                int notificationId = jsonObject.getInt("id");
-                                String message = jsonObject.getString("message");
-                                showNotification(message, notificationId);
-                            }
-                        } catch (JSONException e) {
-                            Log.e(TAG, "JSON parsing error: " + e.getMessage());
-                        }
+                        handleNotificationResponse(response);
                     }
                 },
                 new Response.ErrorListener() {
@@ -95,9 +87,25 @@ public class NotificationAddJobService extends Service {
         requestQueue.add(jsonArrayRequest);
     }
 
+    private void handleNotificationResponse(JSONArray response) {
+        if (response != null && response.length() > 0) {
+            try {
+                for (int i = 0; i < response.length(); i++) {
+                    JSONObject jsonObject = response.getJSONObject(i);
+                    int notificationId = jsonObject.getInt("id");
+                    String message = jsonObject.getString("message");
+                    showNotification(message, notificationId);
+                }
+            } catch (JSONException e) {
+                Log.e(TAG, "JSON parsing error: " + e.getMessage());
+            }
+        } else {
+            Log.d(TAG, "No notifications found.");
+        }
+    }
+
     @SuppressLint("MissingPermission")
     private void showNotification(String message, int notificationId) {
-
         createNotificationChannel();
         Intent intent = new Intent(this, Showjobs.class);
         intent.putExtra("notification_id", notificationId);
@@ -125,5 +133,4 @@ public class NotificationAddJobService extends Service {
             Log.d(TAG, "Notification channel created with ID: " + CHANNEL_ID);
         }
     }
-
 }

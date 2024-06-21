@@ -51,7 +51,7 @@ public class Edituser extends AppCompatActivity {
         userpassword = intent.getStringExtra("password");
         textinputname.setText(username);
         textinputemail.setText(useremail);
-        textinputpassword.setText(userpassword);
+//        textinputpassword.setText(userpassword);
         editbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ public class profile extends AppCompatActivity {
     private Intent intent;
     private String name, email, password;
     private int userid;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +29,12 @@ public class profile extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_profile);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
-
+        sharedPreferences = getSharedPreferences("yellow", MODE_PRIVATE);
         intent = getIntent();
-        name = intent.getStringExtra("name");
-        email = intent.getStringExtra("email");
-        password = intent.getStringExtra("password");
-        userid = intent.getIntExtra("userid", 0);
+        name = sharedPreferences.getString("name","");
+        email =  sharedPreferences.getString("email","");
+        password =  sharedPreferences.getString("password","");
+        userid = sharedPreferences.getInt("userid",0);
 
         viewModel.setUserData(name, email);
 
