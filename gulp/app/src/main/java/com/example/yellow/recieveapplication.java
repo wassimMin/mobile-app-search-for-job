@@ -108,7 +108,7 @@ public class recieveapplication extends AppCompatActivity {
     }
 
     private void fetchApplications() {
-        String url = "http://192.168.1.52/memoire/get_application.php?userid="+ companyid;
+        String url = "http://192.168.1.52/memoire/get_application.php?companyid=" + companyid;
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -119,10 +119,15 @@ public class recieveapplication extends AppCompatActivity {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        if (response != null && response.length() > 0) {
-                            try {
+                        try {
+                            applicationList.clear();  // Clear the list before adding new items
+                            if (response.length() > 0) {
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject jsonObject = response.getJSONObject(i);
+                                    if (jsonObject.has("message")) {
+                                        Toast.makeText(recieveapplication.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                                        continue;
+                                    }
                                     String appid = String.valueOf(jsonObject.getInt("id"));
                                     String userName = jsonObject.getString("user_name");
                                     String jobName = jsonObject.getString("job_name");
@@ -140,27 +145,25 @@ public class recieveapplication extends AppCompatActivity {
                                     AplicationItem application = new AplicationItem(appid, userName, jobName, cvPdfData, String.valueOf(userid));
                                     applicationList.add(application);
                                 }
-                                applicationAdapter.notifyDataSetChanged();
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                                Toast.makeText(recieveapplication.this, "Error parsing JSON response", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(recieveapplication.this, "No applications found", Toast.LENGTH_SHORT).show();
                             }
-                        } else {
-                            // Show message indicating no applications found
-                            Toast.makeText(recieveapplication.this, "There are no applications added", Toast.LENGTH_SHORT).show();
+                            applicationAdapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(recieveapplication.this, "Error parsing JSON response", Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // Log the error message for debugging
-                        Log.e("Volley Error", ":P" + error.getMessage());
-                        Toast.makeText(recieveapplication.this, "Error fetching applications", Toast.LENGTH_SHORT).show();
+                        String errorMessage = (error.getMessage() != null) ? error.getMessage() : "Unknown error";
+                        Log.e("Volley Error", errorMessage);
+                        Toast.makeText(recieveapplication.this, "Error fetching applications: " + errorMessage, Toast.LENGTH_SHORT).show();
                     }
                 });
 
         queue.add(jsonArrayRequest);
     }
-
 }
