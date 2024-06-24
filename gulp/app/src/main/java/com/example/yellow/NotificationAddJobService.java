@@ -64,7 +64,7 @@ public class NotificationAddJobService extends Service {
     }
 
     private void fetchJobNotifications() {
-        String url = "http://192.168.1.52/memoire/get_addjobnotification.php?jobsearcher_id=" + jobsearcher_id;
+        String url = "http://192.168.29.101/memoire/get_addjobnotification.php?jobsearcher_id=" + jobsearcher_id;
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,

@@ -35,7 +35,7 @@ public class Showjobs extends AppCompatActivity {
 
     private int userId;
     private static final String TAG = "ShowJobs";
-    private static final String REMOVE_NOTIFICATION_URL_BASE = "http://192.168.1.52/memoire/remove_notificationaddjob.php?id=";
+    private static final String REMOVE_NOTIFICATION_URL_BASE = "http://192.168.29.101/memoire/remove_notificationaddjob.php?id=";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -106,7 +106,7 @@ public class Showjobs extends AppCompatActivity {
 
     private void fetchJobs() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://192.168.1.52/memoire/fetch_jobss.php";
+        String url = "http://192.168.29.101/memoire/fetch_jobss.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {

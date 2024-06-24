@@ -46,7 +46,7 @@ public class consultjobs extends AppCompatActivity {
     }
 
     private void fetchJobs() {
-        String url = "http://192.168.1.52/memoire/fetch_jobs.php";
+        String url = "http://192.168.29.101/memoire/fetch_jobs.php";
 
         RequestQueue queue = Volley.newRequestQueue(this);
 

@@ -95,7 +95,7 @@ public class addjob extends AppCompatActivity {
                 }
 
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url = "http://192.168.1.52/memoire/addjob.php";
+                String url = "http://192.168.29.101/memoire/addjob.php";
 
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {

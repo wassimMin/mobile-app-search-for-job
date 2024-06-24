@@ -45,7 +45,7 @@ public class NotificationService extends Service {
     private void checkNotifications(int userId) {
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        String url = "http://192.168.1.52/memoire/notifications.php?user_id=" + userId;
+        String url = "http://192.168.29.101/memoire/notifications.php?user_id=" + userId;
         Log.d(TAG, "Notification URL: " + url);
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,

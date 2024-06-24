@@ -62,7 +62,7 @@ public class Status extends AppCompatActivity {
     }
 
     private void fetchJobs() {
-        String url = "http://192.168.1.52/memoire/getsjob.php?userid=" + userid;
+        String url = "http://192.168.29.101/memoire/getsjob.php?userid=" + userid;
         RequestQueue queue = Volley.newRequestQueue(this);
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(

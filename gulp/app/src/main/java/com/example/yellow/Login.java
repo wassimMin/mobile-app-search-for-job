@@ -51,7 +51,7 @@ public class Login extends AppCompatActivity {
                 String password = String.valueOf(textinputedittextpassword.getText()).trim();
 
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url = "http://192.168.1.52/memoire/login.php";
+                String url = "http://192.168.29.101/memoire/login.php";
 
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {

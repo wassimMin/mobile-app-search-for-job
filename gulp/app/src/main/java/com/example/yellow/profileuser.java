@@ -67,7 +67,7 @@ public class profileuser extends AppCompatActivity {
 
     private void fetchUserProfile() {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        String url = "http://192.168.1.52/memoire/fetch_profile.php";
+        String url = "http://192.168.29.101/memoire/fetch_profile.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {

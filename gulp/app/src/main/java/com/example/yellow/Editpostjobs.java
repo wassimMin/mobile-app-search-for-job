@@ -54,7 +54,7 @@ public class Editpostjobs extends AppCompatActivity {
     }
 
     private void updateJobPost(String jobId) {
-        String url = "http://192.168.1.52/memoire/update_job_post.php";
+        String url = "http://192.168.29.101/memoire/update_job_post.php";
 
         StringRequest updateRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {

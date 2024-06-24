@@ -79,7 +79,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private void sendMessage(final String messageContent) {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        String url = "http://192.168.1.52/memoire/send_message.php";
+        String url = "http://192.168.29.101/memoire/send_message.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -115,7 +115,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private void fetchMessages() {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        String url = "http://192.168.1.52/memoire/fetch_messages.php";
+        String url = "http://192.168.29.101/memoire/fetch_messages.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {

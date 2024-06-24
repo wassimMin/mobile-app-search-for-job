@@ -87,7 +87,7 @@ public class JobDetails extends AppCompatActivity {
         });
     }
     private void deleteJob(){
-        String url = "http://192.168.1.52/memoire/delete_job.php?job_id=" + jobId;
+        String url = "http://192.168.29.101/memoire/delete_job.php?job_id=" + jobId;
 
         RequestQueue queue = Volley.newRequestQueue(this);
 

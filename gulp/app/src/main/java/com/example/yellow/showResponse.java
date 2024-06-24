@@ -49,7 +49,7 @@ public class showResponse extends AppCompatActivity {
     }
 
     private void fetchJobResponses() {
-        String url = "http://192.168.1.52/memoire/fetch_responses.php?userid=" + userid;
+        String url = "http://192.168.29.101/memoire/fetch_responses.php?userid=" + userid;
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override

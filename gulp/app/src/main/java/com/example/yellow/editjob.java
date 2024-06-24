@@ -80,7 +80,7 @@ public class editjob extends AppCompatActivity {
         final String experience = experienceType.getSelectedItem().toString();
         final String education = educationType.getSelectedItem().toString();
 
-        String url = "http://192.168.1.52/memoire/editjob.php";
+        String url = "http://192.168.29.101/memoire/editjob.php";
 
         RequestQueue queue = Volley.newRequestQueue(this);
 

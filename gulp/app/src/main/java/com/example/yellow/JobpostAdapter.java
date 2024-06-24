@@ -111,8 +111,7 @@ public class JobpostAdapter extends RecyclerView.Adapter<JobpostAdapter.JobViewH
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(context);
 
-        // Define the URL of your delete endpoint
-        String url = "http://192.168.1.52/memoire/deletepostjob.php";
+        String url = "http://192.168.29.101/memoire/deletepostjob.php";
 
         // Create the request
         StringRequest deleteRequest = new StringRequest(Request.Method.POST, url,

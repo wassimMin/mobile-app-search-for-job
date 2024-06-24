@@ -86,7 +86,7 @@ public class ResponseAdapter extends RecyclerView.Adapter<ResponseAdapter.ViewHo
 
     // Method to remove response from the database
     private void removeResponse(int applicationId) {
-        String url = "http://192.168.1.52/memoire/remove_response.php";
+        String url = "http://192.168.29.101/memoire/remove_response.php";
 
         RequestQueue queue = Volley.newRequestQueue(context);
 

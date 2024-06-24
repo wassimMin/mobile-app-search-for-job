@@ -75,7 +75,7 @@ public class Edituser extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://192.168.1.52/memoire/edituser.php";
+        String url = "http://192.168.29.101/memoire/edituser.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {

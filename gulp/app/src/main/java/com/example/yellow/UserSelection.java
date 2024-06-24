@@ -49,7 +49,7 @@ public class UserSelection extends AppCompatActivity {
 
     private void fetchUsers() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://192.168.1.52/memoire/fetch_users.php";
+        String url = "http://192.168.29.101/memoire/fetch_users.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {

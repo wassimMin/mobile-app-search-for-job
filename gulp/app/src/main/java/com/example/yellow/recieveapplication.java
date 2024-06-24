@@ -73,7 +73,7 @@ public class recieveapplication extends AppCompatActivity {
     }
 
     private void deleteNotificationFromDatabase(String notificationId) throws JSONException {
-        String url = "http://192.168.1.52/memoire/delete_notification.php?id="+ notificationId;
+        String url = "http://192.168.29.101/memoire/delete_notification.php?id="+ notificationId;
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -108,7 +108,7 @@ public class recieveapplication extends AppCompatActivity {
     }
 
     private void fetchApplications() {
-        String url = "http://192.168.1.52/memoire/get_application.php?companyid=" + companyid;
+        String url = "http://192.168.29.101/memoire/get_application.php?companyid=" + companyid;
 
         RequestQueue queue = Volley.newRequestQueue(this);
 

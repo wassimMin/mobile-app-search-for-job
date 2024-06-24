@@ -66,7 +66,7 @@ public class Registration extends AppCompatActivity {
                 }
 
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url = "http://192.168.1.52/memoire/register.php";
+                String url = "http://192.168.29.101/memoire/register.php";
 
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {

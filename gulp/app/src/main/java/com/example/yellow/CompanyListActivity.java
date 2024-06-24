@@ -56,7 +56,7 @@ public class CompanyListActivity extends AppCompatActivity {
     }
 
     private void fetchAcceptedOffers() {
-        String url = "http://192.168.1.52/memoire/companylist.php";
+        String url = "http://192.168.29.101/memoire/companylist.php";
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override

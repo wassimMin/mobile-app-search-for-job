@@ -188,7 +188,7 @@ public class applyjob extends AppCompatActivity {
     }
 
     private void submitApplication(int userId, int jobId, byte[] pdfByteArray) {
-        String url = "http://192.168.1.52/memoire/application.php";
+        String url = "http://192.168.29.101/memoire/application.php";
 
         RequestQueue queue = Volley.newRequestQueue(this);
 

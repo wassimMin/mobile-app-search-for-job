@@ -3,8 +3,10 @@ package com.example.yellow;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
@@ -91,17 +93,23 @@ public class Receiveapplicationdetails extends AppCompatActivity {
                         fos.write(cvPdfData);
                         fos.close();
 
-                        Uri pdfUri = FileProvider.getUriForFile(Receiveapplicationdetails.this, "com.example.yellow.fileprovider", pdfFile);
+                        // Get the absolute file path of the PDF
+                        String authority = getApplicationContext().getPackageName() + ".fileprovider";
+                        Uri pdfUri = FileProvider.getUriForFile(Receiveapplicationdetails.this, authority, pdfFile);
 
+                        // Create an intent to open the PDF using a viewer
                         Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setDataAndType(pdfUri, "application/pdf");
+                        intent.setDataAndType(pdfUri, "application/*");
                         intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
-                        if (intent.resolveActivity(getPackageManager()) != null) {
+                        // Verify that there is an app available to handle the intent
+                        PackageManager packageManager = getPackageManager();
+                        if (intent.resolveActivity(packageManager) != null) {
                             startActivity(intent);
                         } else {
-                            Toast.makeText(Receiveapplicationdetails.this, "No app to view PDF", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Receiveapplicationdetails.this, "No app found to open PDF", Toast.LENGTH_SHORT).show();
                         }
+
                     } catch (IOException e) {
                         e.printStackTrace();
                         Toast.makeText(Receiveapplicationdetails.this, "Failed to open PDF", Toast.LENGTH_SHORT).show();
@@ -110,16 +118,15 @@ public class Receiveapplicationdetails extends AppCompatActivity {
                     Toast.makeText(Receiveapplicationdetails.this, "No PDF data found", Toast.LENGTH_SHORT).show();
                 }
             }
-
         });
-        
     }
+
     private void setResponse(String status){
         if (message.isEmpty() || applicationId.isEmpty() || companyId == -1 || userId == -1) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
         }
-        String url = "http://192.168.1.52/memoire/set_response.php";
+        String url = "http://192.168.29.101/memoire/set_response.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
